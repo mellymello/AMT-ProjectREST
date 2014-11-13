@@ -1,0 +1,133 @@
+{
+	"title": "API Resource Example",
+	"baseUri": "https://localhost/api/{version}",
+	"version": "v1",
+	"protocols": [
+		"HTTPS"
+	],
+	"mediaType": "application/json",
+	"traits": [
+		{
+			"private": {
+				"usage": "Just a marker that a resource of method is not part of the public API."
+			}
+		}
+	],
+	"resources": [
+		{
+			"description": "This is my resource.",
+			"relativeUri": "/myResource",
+			"methods": [
+				{
+					"description": "Create a resource. More text is only rendered in the details view of the method.",
+					"body": {
+						"application/json": {
+							"example": "{ \"name\" : \"myResource\" }\n"
+						}
+					},
+					"responses": {
+						"201": {
+							"body": {
+								"application/json": {
+									"example": "{ \"id\" : 1, \"name\" : \"myResource\" }\n"
+								}
+							}
+						}
+					},
+					"headers": {
+						"Authorization": {
+							"description": "A description.\n<private>\nNote that you can also add `<private>` blocks in here.\n</private>\n",
+							"displayName": "Authorization",
+							"type": "string"
+						}
+					},
+					"protocols": [
+						"HTTPS"
+					],
+					"method": "post"
+				}
+			],
+			"resources": [
+				{
+					"relativeUri": "/{myResourceId}",
+					"methods": [
+						{
+							"description": "Retrieve a resource.",
+							"responses": {
+								"200": {
+									"body": {
+										"application/json": {
+											"example": "{ \"id\" : 1, \"name\" : \"myResource\" }\n"
+										}
+									}
+								},
+								"404": {
+									"description": "The resource was not found."
+								}
+							},
+							"method": "get"
+						},
+						{
+							"is": [
+								"private"
+							],
+							"description": "Delete a resource.",
+							"method": "delete"
+						}
+					],
+					"relativeUriPathSegments": [
+						"{myResourceId}"
+					],
+					"uriParameters": {
+						"myResourceId": {
+							"type": "string",
+							"required": true,
+							"displayName": "myResourceId"
+						}
+					}
+				}
+			],
+			"relativeUriPathSegments": [
+				"myResource"
+			]
+		},
+		{
+			"is": [
+				"private"
+			],
+			"description": "This is a private resource.",
+			"relativeUri": "/adminResource",
+			"methods": [
+				{
+					"description": "Get secret message.",
+					"responses": {
+						"200": {
+							"body": {
+								"application/json": {
+									"example": "{\"secret\" : \"message\"}\n"
+								}
+							}
+						}
+					},
+					"protocols": [
+						"HTTPS"
+					],
+					"method": "get"
+				}
+			],
+			"relativeUriPathSegments": [
+				"adminResource"
+			]
+		}
+	],
+	"baseUriParameters": {
+		"version": {
+			"type": "string",
+			"required": true,
+			"displayName": "version",
+			"enum": [
+				"v1"
+			]
+		}
+	}
+}
