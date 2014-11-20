@@ -15,30 +15,191 @@
 	],
 	"resources": [
 		{
-			"description": "List of a Facts.",
-			"relativeUri": "/facts",
+			"description": "Sensor's list",
+			"relativeUri": "/sensors",
 			"methods": [
 				{
-					"description": "Create a fact. More text is only rendered in the details view of the method.",
+					"description": "Create a sensor.",
 					"body": {
 						"application/json": {
-							"example": "{ \"name\" : \"Fact\" }\n"
+							"example": "{name\" : \"Sensor1\", \"description\" : \"HEIG-VD's temperature sensor\", \"type\" : \"thermometer\", \"visibility\" : \"public\"}\n"
 						}
 					},
 					"responses": {
 						"201": {
 							"body": {
 								"application/json": {
-									"example": "{ \"id\" : 1, \"name\" : \"Fact\" }\n"
+									"example": "{\"id\" : 5, \"sensorName\" : \"Sensor1\", \"description\" : \"HEIG-VD's temperature sensor\", \"type\" : \"thermometer\", \"visibility\" : \"public\"}\n"
 								}
 							}
 						}
 					},
-					"headers": {
-						"Authorization": {
-							"description": "A description.\n<private>\nNote that you can also add `<private>` blocks in here.\n</private>\n",
-							"displayName": "Authorization",
-							"type": "string"
+					"protocols": [
+						"HTTPS"
+					],
+					"method": "post"
+				}
+			],
+			"resources": [
+				{
+					"relativeUri": "/{sensorId}",
+					"methods": [
+						{
+							"description": "Retrieve a sensor.",
+							"responses": {
+								"200": {
+									"body": {
+										"application/json": {
+											"example": "{\"id\" : 5, \"sensorName\" : \"Sensor1\", \"description\" : \"HEIG-VD's temperature sensor\", \"type\" : \"thermometer\", \"visibility\" : \"public\"}\n"
+										}
+									}
+								},
+								"404": {
+									"description": "Sensor not found"
+								}
+							},
+							"method": "get"
+						},
+						{
+							"description": "Update a sensor",
+							"body": {
+								"application/json": {
+									"example": "{\"sensorName\" : \"Sensor1\", \"description\" : \"HEIG-VD's temperature sensor\", \"type\" : \"thermometer\", \"visibility\" : \"public\"}\n"
+								}
+							},
+							"responses": {
+								"201": {
+									"body": {
+										"application/json": {
+											"example": "{\"id\" : 5, \"sensorName\" : \"Sensor1\", \"description\" : \"HEIG-VD's temperature sensor\", \"type\" : \"thermometer\", \"visibility\" : \"public\"}\n"
+										}
+									}
+								}
+							},
+							"method": "put"
+						},
+						{
+							"is": [
+								"private"
+							],
+							"description": "Delete a sensor\n",
+							"responses": {
+								"204": {
+									"description": "Succesfully deleted sensor\n"
+								}
+							},
+							"method": "delete"
+						}
+					],
+					"relativeUriPathSegments": [
+						"{sensorId}"
+					],
+					"uriParameters": {
+						"sensorId": {
+							"type": "string",
+							"required": true,
+							"displayName": "sensorId"
+						}
+					}
+				}
+			],
+			"relativeUriPathSegments": [
+				"sensors"
+			]
+		},
+		{
+			"description": "Observation's list.",
+			"relativeUri": "/observations",
+			"methods": [
+				{
+					"description": "Create an observation",
+					"body": {
+						"application/json": {
+							"example": "{\"time\" : \"yyyy-mm-ddThh:mm:ssZ\", \"value\" : 123, \"sensorId\" : 1}\n"
+						}
+					},
+					"responses": {
+						"201": {
+							"body": {
+								"application/json": {
+									"example": "{\"id\" : 1, \"time\" : \"yyyy-mm-ddThh:mm:ssZ\", \"value\" : 123, \"sensorId\" : 1}\n"
+								}
+							}
+						}
+					},
+					"protocols": [
+						"HTTPS"
+					],
+					"method": "post"
+				}
+			],
+			"resources": [
+				{
+					"relativeUri": "/{observationId}",
+					"methods": [
+						{
+							"description": "Retrieve one observation",
+							"responses": {
+								"200": {
+									"body": {
+										"application/json": {
+											"example": "{\"id\" : 1, \"time\" : \"yyyy-mm-ddThh:mm:ssZ\", \"value\" : 123, \"sensorId\" : 1}\n"
+										}
+									}
+								},
+								"404": {
+									"description": "Observation not found"
+								}
+							},
+							"method": "get"
+						},
+						{
+							"is": [
+								"private"
+							],
+							"description": "Delete an observation\n",
+							"responses": {
+								"204": {
+									"description": "Succesfully deleted observation\n"
+								}
+							},
+							"method": "delete"
+						}
+					],
+					"relativeUriPathSegments": [
+						"{observationId}"
+					],
+					"uriParameters": {
+						"observationId": {
+							"type": "string",
+							"required": true,
+							"displayName": "observationId"
+						}
+					}
+				}
+			],
+			"relativeUriPathSegments": [
+				"observations"
+			]
+		},
+		{
+			"description": "Fact's list.",
+			"relativeUri": "/facts",
+			"methods": [
+				{
+					"description": "Create a fact.",
+					"body": {
+						"application/json": {
+							"example": "{\"info\" : \"Average temperature in Lausanne is 20�C\", \"type\" : \"Temperature\", \"visibility\" : \"public\"}\n"
+						}
+					},
+					"responses": {
+						"201": {
+							"body": {
+								"application/json": {
+									"example": "{\"id\" : 20, \"info\" : \"Average temperature in Lausanne is 20�C\", \"type\" : \"Temperature\", \"visibility\" : \"public\"}\n"
+								}
+							}
 						}
 					},
 					"protocols": [
@@ -57,7 +218,7 @@
 								"200": {
 									"body": {
 										"application/json": {
-											"example": "{ \"id\" : 1, \"name\" : \"Fact\" }\n"
+											"example": "{\"id\" : 20, \"info\" : \"Average temperature in Lausanne is 20�C\", \"type\" : \"Temperature\", \"visibility\" : \"public\"}\n"
 										}
 									}
 								},
@@ -68,14 +229,33 @@
 							"method": "get"
 						},
 						{
-							"description": "Update a fact",
+							"description": "Update a fact.",
+							"body": {
+								"application/json": {
+									"example": "{\"info\" : \"The average temperature on Yverdon for 2013 is 20�C\", \"type\" : \"Temperature\", \"visibility\" : \"public\"}\n"
+								}
+							},
+							"responses": {
+								"201": {
+									"body": {
+										"application/json": {
+											"example": "{\"id\" : 20, \"info\" : \"The average temperature on Yverdon for 2013 is 20�C\", \"type\" : \"Temperature\", \"visibility\" : \"public\"}\n"
+										}
+									}
+								}
+							},
 							"method": "put"
 						},
 						{
 							"is": [
 								"private"
 							],
-							"description": "Delete a sensor.",
+							"description": "Delete a fact",
+							"responses": {
+								"204": {
+									"description": "Succesfully deleted fact\n"
+								}
+							},
 							"method": "delete"
 						}
 					],
@@ -96,65 +276,44 @@
 			]
 		},
 		{
-			"description": "List of observations.",
-			"relativeUri": "/observations",
+			"description": "User's list.",
+			"relativeUri": "/users",
 			"methods": [
 				{
-					"description": "list of observations",
-					"body": {
-						"application/json": {
-							"example": "{ \"name\" : \"obsX\" }\n"
+					"is": [
+						"private"
+					],
+					"description": "Retrieve all users.",
+					"responses": {
+						"200": {
+							"body": {
+								"application/json": {
+									"example": "{\"id\" : 1, \"username\" : \"Username1\", \"email\" : \"mail@mail.com\", \"organisationId\" : 1}\n"
+								}
+							}
 						}
 					},
 					"protocols": [
 						"HTTPS"
 					],
 					"method": "get"
-				}
-			],
-			"resources": [
+				},
 				{
-					"relativeUri": "/{observationId}",
-					"methods": [
-						{
-							"description": "Retrieve an observation.",
-							"responses": {
-								"200": {
-									"body": {
-										"application/json": {
-											"example": "{ \"id\" : 1, \"name\" : \"obsY\" }\n"
-										}
-									}
-								},
-								"404": {
-									"description": "The fact was not found."
+					"description": "Create a new user.",
+					"body": {
+						"application/json": {
+							"example": "{\"username\" : \"Username1\", \"password\" : \"UserPassword\", \"email\" : \"mail@mail.com\", \"organisationId\" : 1}\n"
+						}
+					},
+					"responses": {
+						"201": {
+							"body": {
+								"application/json": {
+									"example": "{\"id\" : 1, \"username\" : \"Username1\", \"password\" : \"UserPassword\", \"email\" : \"mail@mail.com\", \"organisationId\" : 1}\n"
 								}
-							},
-							"method": "get"
+							}
 						}
-					],
-					"relativeUriPathSegments": [
-						"{observationId}"
-					],
-					"uriParameters": {
-						"observationId": {
-							"type": "string",
-							"required": true,
-							"displayName": "observationId"
-						}
-					}
-				}
-			],
-			"relativeUriPathSegments": [
-				"observations"
-			]
-		},
-		{
-			"description": "This is the list of available sensors.",
-			"relativeUri": "/sensors",
-			"methods": [
-				{
-					"description": "create sensor",
+					},
 					"protocols": [
 						"HTTPS"
 					],
@@ -163,50 +322,181 @@
 			],
 			"resources": [
 				{
-					"relativeUri": "/{sensorId}",
+					"relativeUri": "/{userId}",
 					"methods": [
 						{
-							"description": "Retrieve a sensor.",
+							"description": "Retrieve one user.",
 							"responses": {
 								"200": {
 									"body": {
 										"application/json": {
-											"example": "{ \"id\" : 1, \"name\" : \"SensorName\" }\n"
+											"example": "{\"id\" : 1, \"username\" : \"Username1\", \"email\" : \"mail@mail.com\", \"organisationId\" : 1}\n"
 										}
 									}
 								},
 								"404": {
-									"description": "The sensor was not found."
+									"description": "User not found."
 								}
 							},
 							"method": "get"
 						},
 						{
-							"description": "update a sensor",
+							"description": "Update user.",
+							"body": {
+								"application/json": {
+									"example": "{\"password\" : \"UserPassword\", \"email\" : \"mail@mail.com\", \"organisationId\" : 1}\n"
+								}
+							},
+							"responses": {
+								"201": {
+									"body": {
+										"application/json": {
+											"example": "{\"id\" : 1, \"username\" : \"NewUserName\", \"password\" : \"NewPassword\", \"email\" : \"mail@mail.com\", \"organisationId\" : 4}\n"
+										}
+									}
+								}
+							},
 							"method": "put"
 						},
 						{
 							"is": [
 								"private"
 							],
-							"description": "Delete a sensor.",
+							"description": "Delete user\n",
+							"responses": {
+								"204": {
+									"description": "Succesfully deleted user\n"
+								}
+							},
 							"method": "delete"
 						}
 					],
 					"relativeUriPathSegments": [
-						"{sensorId}"
+						"{userId}"
 					],
 					"uriParameters": {
-						"sensorId": {
+						"userId": {
 							"type": "string",
 							"required": true,
-							"displayName": "sensorId"
+							"displayName": "userId"
 						}
 					}
 				}
 			],
 			"relativeUriPathSegments": [
-				"sensors"
+				"users"
+			]
+		},
+		{
+			"description": "Organisation's list.",
+			"relativeUri": "/organisations",
+			"methods": [
+				{
+					"is": [
+						"private"
+					],
+					"description": "Retrieve all organisations.",
+					"responses": {
+						"200": {
+							"body": {
+								"application/json": {
+									"example": "{\"id\" : 1, \"organisationName\" : \"OrganisationName\", \"contactUserId\" : 1}\n"
+								}
+							}
+						}
+					},
+					"protocols": [
+						"HTTPS"
+					],
+					"method": "get"
+				},
+				{
+					"description": "Create a new organisation.",
+					"body": {
+						"application/json": {
+							"example": "{\"organisationName\" : \"OrganisationName\", \"contactUserId\" : 4}\n"
+						}
+					},
+					"responses": {
+						"201": {
+							"body": {
+								"application/json": {
+									"example": "{\"id\" : 3, \"OrganisationName\", \"contactUserId\" : 4}\n"
+								}
+							}
+						}
+					},
+					"protocols": [
+						"HTTPS"
+					],
+					"method": "post"
+				}
+			],
+			"resources": [
+				{
+					"relativeUri": "/{organisationId}",
+					"methods": [
+						{
+							"description": "Retrieve an organisation.",
+							"responses": {
+								"200": {
+									"body": {
+										"application/json": {
+											"example": "{\"id\" : 1, \"organisationName\" : \"OrganisationName\", \"contactUserId\" : 1}\n"
+										}
+									}
+								},
+								"404": {
+									"description": "Organisation not found."
+								}
+							},
+							"method": "get"
+						},
+						{
+							"description": "Update organisation infos.",
+							"body": {
+								"application/json": {
+									"example": "{\"organisationName\" : \"NewOrganisationName\", \"contactUserId\" : 1}\n"
+								}
+							},
+							"responses": {
+								"201": {
+									"body": {
+										"application/json": {
+											"example": "{\"id\" : 1, \"organisationName\" : \"NewOrganisationName\", \"contactUserId\" : 1}\n"
+										}
+									}
+								}
+							},
+							"method": "put"
+						},
+						{
+							"is": [
+								"private"
+							],
+							"description": "Delete organisation\n",
+							"responses": {
+								"204": {
+									"description": "Succesfully deleted organisation"
+								}
+							},
+							"method": "delete"
+						}
+					],
+					"relativeUriPathSegments": [
+						"{organisationId}"
+					],
+					"uriParameters": {
+						"organisationId": {
+							"type": "string",
+							"required": true,
+							"displayName": "organisationId"
+						}
+					}
+				}
+			],
+			"relativeUriPathSegments": [
+				"organisations"
 			]
 		}
 	],

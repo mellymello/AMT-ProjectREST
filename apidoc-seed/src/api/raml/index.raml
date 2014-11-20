@@ -9,67 +9,20 @@ mediaType: application/json
 traits:
   - private: !include _traits/private.raml
 
-/facts:
-  description: List of a Facts.
+/sensors:
+  description: Sensor's list
   post:
-    description: Create a fact. More text is only rendered in the details view of the method.
+    description: Create a sensor.
     body:
       application/json:
         example: |
-          { "name" : "Fact" }
+          {name" : "Sensor1", "description" : "HEIG-VD's temperature sensor", "type" : "thermometer", "visibility" : "public"}
     responses:
       201:
         body:
           application/json:
             example: |
-              { "id" : 1, "name" : "Fact" }
-    headers:
-      Authorization:
-        description: |
-          A description.
-          <private>
-          Note that you can also add `<private>` blocks in here.
-          </private>
-
-  /{factId}:
-    get:
-      description: Retrieve a fact.
-      responses:
-        200:
-          body:
-            application/json:
-              example: |
-                { "id" : 1, "name" : "Fact" }
-        404:
-          description: The fact was not found.
-    put:
-      description: Update a fact
-    delete:
-      is: [private]
-      description: Delete a sensor.
-
-/observations:
-  description: List of observations.
-  get:
-    description: list of observations
-    body:
-      application/json:
-        example: |
-          { "name" : "obsX" }
-
-  /{observationId}:
-    get:
-      description: Retrieve an observation.
-      responses:
-        200:
-          body:
-            application/json:
-              example: |
-                { "id" : 1, "name" : "obsY" }
-        404:
-          description: The fact was not found.
-/sensors:
-  description: This is the list of available sensors.
+              {"id" : 5, "sensorName" : "Sensor1", "description" : "HEIG-VD's temperature sensor", "type" : "thermometer", "visibility" : "public"}
   /{sensorId}:
     get:
       description: Retrieve a sensor.
@@ -78,13 +31,214 @@ traits:
           body:
             application/json:
               example: |
-                { "id" : 1, "name" : "SensorName" }
+                {"id" : 5, "sensorName" : "Sensor1", "description" : "HEIG-VD's temperature sensor", "type" : "thermometer", "visibility" : "public"}
         404:
-          description: The sensor was not found.
+          description: Sensor not found
     put:
-      description: update a sensor
+      description: Update a sensor
+      body:
+        application/json:
+          example: |
+            {"sensorName" : "Sensor1", "description" : "HEIG-VD's temperature sensor", "type" : "thermometer", "visibility" : "public"}
+      responses:
+        201:
+          body:
+            application/json:
+              example: |
+                {"id" : 5, "sensorName" : "Sensor1", "description" : "HEIG-VD's temperature sensor", "type" : "thermometer", "visibility" : "public"}
+    delete:
+        is: [private]
+        description: |
+          Delete a sensor
+        responses:
+          204:
+            description: |
+              Succesfully deleted sensor
+/observations:
+  description: Observation's list.
+  post:
+    description: Create an observation
+    body:
+      application/json:
+        example: |
+          {"time" : "yyyy-mm-ddThh:mm:ssZ", "value" : 123, "sensorId" : 1}
+    responses:
+      201:
+        body:
+          application/json:
+            example: |
+              {"id" : 1, "time" : "yyyy-mm-ddThh:mm:ssZ", "value" : 123, "sensorId" : 1}
+  /{observationId}:
+    get:
+      description: Retrieve one observation
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {"id" : 1, "time" : "yyyy-mm-ddThh:mm:ssZ", "value" : 123, "sensorId" : 1}
+        404:
+          description: Observation not found
+    delete:
+        is: [private]
+        description: |
+          Delete an observation
+        responses:
+          204:
+            description: |
+              Succesfully deleted observation
+
+/facts:
+  description: Fact's list.
+  post:
+    description: Create a fact.
+    body:
+      application/json:
+        example: |
+          {"info" : "Average temperature in Lausanne is 20°C", "type" : "Temperature", "visibility" : "public"}
+    responses:
+      201:
+        body:
+          application/json:
+            example: |
+              {"id" : 20, "info" : "Average temperature in Lausanne is 20°C", "type" : "Temperature", "visibility" : "public"}
+  /{factId}:
+    get:
+      description: Retrieve a fact.
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {"id" : 20, "info" : "Average temperature in Lausanne is 20°C", "type" : "Temperature", "visibility" : "public"}
+        404:
+          description: The fact was not found.
+    put:
+      description: Update a fact.
+      body:
+        application/json:
+          example: |
+            {"info" : "The average temperature on Yverdon for 2013 is 20°C", "type" : "Temperature", "visibility" : "public"}
+      responses:
+        201:
+          body:
+            application/json:
+              example: |
+                {"id" : 20, "info" : "The average temperature on Yverdon for 2013 is 20°C", "type" : "Temperature", "visibility" : "public"}
+    delete:
+        is: [private]
+        description: Delete a fact
+        responses:
+          204:
+            description: |
+              Succesfully deleted fact
+
+/users:
+  description: User's list.
+  get:
+    is: [private]
+    description: Retrieve all users.
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {"id" : 1, "username" : "Username1", "email" : "mail@mail.com", "organisationId" : 1}
+  post:
+    description: Create a new user.
+    body:
+      application/json:
+        example: |
+          {"username" : "Username1", "password" : "UserPassword", "email" : "mail@mail.com", "organisationId" : 1}
+    responses:
+      201:
+        body:
+          application/json:
+            example: |
+              {"id" : 1, "username" : "Username1", "password" : "UserPassword", "email" : "mail@mail.com", "organisationId" : 1}
+  /{userId}:
+    get:
+      description: Retrieve one user.
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {"id" : 1, "username" : "Username1", "email" : "mail@mail.com", "organisationId" : 1}
+        404:
+          description: User not found.
+    put:
+      description: Update user.
+      body:
+        application/json:
+          example: |
+            {"password" : "UserPassword", "email" : "mail@mail.com", "organisationId" : 1}
+      responses:
+        201:
+          body:
+            application/json:
+              example: |
+                {"id" : 1, "username" : "NewUserName", "password" : "NewPassword", "email" : "mail@mail.com", "organisationId" : 4}
     delete:
       is: [private]
-      description: Delete a sensor.
+      description: |
+        Delete user
+      responses:
+        204:
+          description: |
+            Succesfully deleted user
+
+/organisations:
+  description: Organisation's list.
+  get:
+    is: [private]
+    description: Retrieve all organisations.
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {"id" : 1, "organisationName" : "OrganisationName", "contactUserId" : 1}
   post:
-    description: create sensor
+    description: Create a new organisation.
+    body:
+      application/json:
+        example: |
+          {"organisationName" : "OrganisationName", "contactUserId" : 4}
+    responses:
+      201:
+        body:
+          application/json:
+            example: |
+              {"id" : 3, "OrganisationName", "contactUserId" : 4}
+  /{organisationId}:
+    get:
+      description: Retrieve an organisation.
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {"id" : 1, "organisationName" : "OrganisationName", "contactUserId" : 1}
+        404:
+          description: Organisation not found.
+    put:
+      description: Update organisation infos.
+      body:
+        application/json:
+          example: |
+            {"organisationName" : "NewOrganisationName", "contactUserId" : 1}
+      responses:
+        201:
+          body:
+            application/json:
+              example: |
+                {"id" : 1, "organisationName" : "NewOrganisationName", "contactUserId" : 1}
+    delete:
+      is: [private]
+      description: |
+        Delete organisation
+      responses:
+        204:
+          description: |
+            Succesfully deleted organisation
