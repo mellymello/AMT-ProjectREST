@@ -11,6 +11,15 @@ traits:
 
 /sensors:
   description: Sensor's list
+  get:
+    is: [private]
+    description: Retrieve all sensors.
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {"id" : 1, "sensorName" : "Sensor1", "description" : "HEIG-VD's temperature sensor", "type" : "thermometer", "visibility" : "public"}
   post:
     description: Create a sensor.
     body:
@@ -22,7 +31,7 @@ traits:
         body:
           application/json:
             example: |
-              {"id" : 5, "sensorName" : "Sensor1", "description" : "HEIG-VD's temperature sensor", "type" : "thermometer", "visibility" : "public"}
+              {"id" : 1, "sensorName" : "Sensor1", "description" : "HEIG-VD's temperature sensor", "type" : "thermometer", "visibility" : "public"}
   /{sensorId}:
     get:
       description: Retrieve a sensor.
@@ -31,7 +40,7 @@ traits:
           body:
             application/json:
               example: |
-                {"id" : 5, "sensorName" : "Sensor1", "description" : "HEIG-VD's temperature sensor", "type" : "thermometer", "visibility" : "public"}
+                {"id" : 1, "sensorName" : "Sensor1", "description" : "HEIG-VD's temperature sensor", "type" : "thermometer", "visibility" : "public"}
         404:
           description: Sensor not found
     put:
