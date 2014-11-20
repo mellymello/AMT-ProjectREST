@@ -11,20 +11,20 @@ import ch.heigvd.amt.amtproject.model.Organisation;
  *
  * @author Calixte
  */
-public class UserDto {
+public class UserDTO {
     private long id;
     private String username;
     private String email;
     private long organisationId;
 
-    public UserDto(long id, String username, String email, long organisation) {
+    public UserDTO(long id, String username, String email, long organisation) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.organisationId = organisation;
     }
     
-    public UserDto () {}
+    public UserDTO () {}
 
     public long getId() {
         return id;

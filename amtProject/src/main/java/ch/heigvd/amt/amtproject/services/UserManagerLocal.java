@@ -5,6 +5,8 @@
  */
 package ch.heigvd.amt.amtproject.services;
 
+import ch.heigvd.amt.amtproject.model.User;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -13,5 +15,15 @@ import javax.ejb.Local;
  */
 @Local
 public interface UserManagerLocal {
+
+    User findUserById(long userId);
+
+    List<User> findAllUser();
+
+    long createUser(User user);
+
+    void updateUser(User user);
+
+    void deleteUser(long userId);
     
 }
