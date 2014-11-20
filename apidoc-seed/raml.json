@@ -1,5 +1,5 @@
 {
-	"title": "API Resource Example",
+	"title": "API AMT Project_1",
 	"baseUri": "https://localhost/api/{version}",
 	"version": "v1",
 	"protocols": [
@@ -92,14 +92,11 @@
 			]
 		},
 		{
-			"is": [
-				"private"
-			],
-			"description": "This is a private resource.",
-			"relativeUri": "/adminResource",
+			"description": "this is a list of sensors",
+			"relativeUri": "/Sensors",
 			"methods": [
 				{
-					"description": "Get secret message.",
+					"description": "Get all sensors",
 					"responses": {
 						"200": {
 							"body": {
@@ -113,10 +110,22 @@
 						"HTTPS"
 					],
 					"method": "get"
+				},
+				{
+					"protocols": [
+						"HTTPS"
+					],
+					"method": "post"
+				},
+				{
+					"protocols": [
+						"HTTPS"
+					],
+					"method": "put"
 				}
 			],
 			"relativeUriPathSegments": [
-				"adminResource"
+				"Sensors"
 			]
 		}
 	],
