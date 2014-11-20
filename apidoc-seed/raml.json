@@ -15,21 +15,21 @@
 	],
 	"resources": [
 		{
-			"description": "This is my resource.",
-			"relativeUri": "/myResource",
+			"description": "This is a Facts.",
+			"relativeUri": "/Facts",
 			"methods": [
 				{
-					"description": "Create a resource. More text is only rendered in the details view of the method.",
+					"description": "Create a fact. More text is only rendered in the details view of the method.",
 					"body": {
 						"application/json": {
-							"example": "{ \"name\" : \"myResource\" }\n"
+							"example": "{ \"name\" : \"Fact\" }\n"
 						}
 					},
 					"responses": {
 						"201": {
 							"body": {
 								"application/json": {
-									"example": "{ \"id\" : 1, \"name\" : \"myResource\" }\n"
+									"example": "{ \"id\" : 1, \"name\" : \"Fact\" }\n"
 								}
 							}
 						}
@@ -45,83 +45,123 @@
 						"HTTPS"
 					],
 					"method": "post"
+				},
+				{
+					"is": [
+						"private"
+					],
+					"description": "Delete a fact.",
+					"protocols": [
+						"HTTPS"
+					],
+					"method": "delete"
 				}
 			],
 			"resources": [
 				{
-					"relativeUri": "/{myResourceId}",
+					"relativeUri": "/{FactId}",
 					"methods": [
 						{
-							"description": "Retrieve a resource.",
+							"description": "Retrieve a fact.",
 							"responses": {
 								"200": {
 									"body": {
 										"application/json": {
-											"example": "{ \"id\" : 1, \"name\" : \"myResource\" }\n"
+											"example": "{ \"id\" : 1, \"name\" : \"Fact\" }\n"
 										}
 									}
 								},
 								"404": {
-									"description": "The resource was not found."
+									"description": "The fact was not found."
 								}
 							},
 							"method": "get"
 						},
 						{
-							"is": [
-								"private"
-							],
-							"description": "Delete a resource.",
-							"method": "delete"
+							"description": "Update a fact",
+							"method": "put"
 						}
 					],
 					"relativeUriPathSegments": [
-						"{myResourceId}"
+						"{FactId}"
 					],
 					"uriParameters": {
-						"myResourceId": {
+						"FactId": {
 							"type": "string",
 							"required": true,
-							"displayName": "myResourceId"
+							"displayName": "FactId"
 						}
 					}
 				}
 			],
 			"relativeUriPathSegments": [
-				"myResource"
+				"Facts"
 			]
 		},
 		{
-			"description": "this is a list of sensors",
+			"description": "This is the list of available observations",
+			"relativeUri": "/Observations",
+			"relativeUriPathSegments": [
+				"Observations"
+			]
+		},
+		{
+			"description": "This is the list of available sensors.",
 			"relativeUri": "/Sensors",
 			"methods": [
 				{
-					"description": "Get all sensors",
-					"responses": {
-						"200": {
-							"body": {
-								"application/json": {
-									"example": "{\"secret\" : \"message\"}\n"
-								}
-							}
-						}
-					},
-					"protocols": [
-						"HTTPS"
-					],
-					"method": "get"
-				},
-				{
-					"protocols": [
-						"HTTPS"
-					],
-					"method": "post"
-				},
-				{
+					"description": "Modify an existing sensor",
 					"protocols": [
 						"HTTPS"
 					],
 					"method": "put"
+				},
+				{
+					"is": [
+						"private"
+					],
+					"description": "Delete a sensor.",
+					"protocols": [
+						"HTTPS"
+					],
+					"method": "delete"
+				}
+			],
+			"resources": [
+				{
+					"relativeUri": "/{SensorId}",
+					"methods": [
+						{
+							"description": "Retrieve a sensor.",
+							"responses": {
+								"200": {
+									"body": {
+										"application/json": {
+											"example": "{ \"id\" : 1, \"name\" : \"SensorName\" }\n"
+										}
+									}
+								},
+								"404": {
+									"description": "The sensor was not found."
+								}
+							},
+							"method": "get"
+						},
+						{
+							"description": "Create a sensor",
+							"method": "post"
+						}
+					],
+					"relativeUriPathSegments": [
+						"{SensorId}"
+					],
+					"uriParameters": {
+						"SensorId": {
+							"type": "string",
+							"required": true,
+							"displayName": "SensorId"
+						}
+					}
 				}
 			],
 			"relativeUriPathSegments": [
