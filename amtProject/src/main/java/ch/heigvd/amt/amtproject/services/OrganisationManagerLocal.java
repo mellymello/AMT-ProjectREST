@@ -5,6 +5,8 @@
  */
 package ch.heigvd.amt.amtproject.services;
 
+import ch.heigvd.amt.amtproject.model.Organisation;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -13,5 +15,15 @@ import javax.ejb.Local;
  */
 @Local
 public interface OrganisationManagerLocal {
+    
+    Organisation findOrganisationById(long userId);
+
+    List<Organisation> findAllOrganisations();
+
+    long createOrganisation(Organisation organisation);
+
+    void updateOrganisation(Organisation organisation);
+
+    void deleteOrganisation(long userId);
     
 }

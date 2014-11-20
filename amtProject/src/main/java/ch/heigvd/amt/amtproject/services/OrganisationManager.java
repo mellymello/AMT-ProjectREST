@@ -5,6 +5,8 @@
  */
 package ch.heigvd.amt.amtproject.services;
 
+import ch.heigvd.amt.amtproject.model.Organisation;
+import java.util.List;
 import javax.ejb.Stateless;
 
 /**
@@ -13,6 +15,31 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class OrganisationManager implements OrganisationManagerLocal {
+
+    @Override
+    public Organisation findOrganisationById(long organisationId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Organisation> findAllOrganisations() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public long createOrganisation(Organisation organisation) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void updateOrganisation(Organisation organisation) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void deleteOrganisation(long organisationId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     
 }
