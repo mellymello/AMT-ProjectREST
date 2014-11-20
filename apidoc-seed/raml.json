@@ -15,8 +15,8 @@
 	],
 	"resources": [
 		{
-			"description": "This is a Facts.",
-			"relativeUri": "/Facts",
+			"description": "List of a Facts.",
+			"relativeUri": "/facts",
 			"methods": [
 				{
 					"description": "Create a fact. More text is only rendered in the details view of the method.",
@@ -45,21 +45,11 @@
 						"HTTPS"
 					],
 					"method": "post"
-				},
-				{
-					"is": [
-						"private"
-					],
-					"description": "Delete a fact.",
-					"protocols": [
-						"HTTPS"
-					],
-					"method": "delete"
 				}
 			],
 			"resources": [
 				{
-					"relativeUri": "/{FactId}",
+					"relativeUri": "/{factId}",
 					"methods": [
 						{
 							"description": "Retrieve a fact.",
@@ -80,56 +70,100 @@
 						{
 							"description": "Update a fact",
 							"method": "put"
+						},
+						{
+							"is": [
+								"private"
+							],
+							"description": "Delete a sensor.",
+							"method": "delete"
 						}
 					],
 					"relativeUriPathSegments": [
-						"{FactId}"
+						"{factId}"
 					],
 					"uriParameters": {
-						"FactId": {
+						"factId": {
 							"type": "string",
 							"required": true,
-							"displayName": "FactId"
+							"displayName": "factId"
 						}
 					}
 				}
 			],
 			"relativeUriPathSegments": [
-				"Facts"
+				"facts"
 			]
 		},
 		{
-			"description": "This is the list of available observations",
-			"relativeUri": "/Observations",
-			"relativeUriPathSegments": [
-				"Observations"
-			]
-		},
-		{
-			"description": "This is the list of available sensors.",
-			"relativeUri": "/Sensors",
+			"description": "List of observations.",
+			"relativeUri": "/observations",
 			"methods": [
 				{
-					"description": "Modify an existing sensor",
+					"description": "list of observations",
+					"body": {
+						"application/json": {
+							"example": "{ \"name\" : \"obsX\" }\n"
+						}
+					},
 					"protocols": [
 						"HTTPS"
 					],
-					"method": "put"
-				},
-				{
-					"is": [
-						"private"
-					],
-					"description": "Delete a sensor.",
-					"protocols": [
-						"HTTPS"
-					],
-					"method": "delete"
+					"method": "get"
 				}
 			],
 			"resources": [
 				{
-					"relativeUri": "/{SensorId}",
+					"relativeUri": "/{observationId}",
+					"methods": [
+						{
+							"description": "Retrieve an observation.",
+							"responses": {
+								"200": {
+									"body": {
+										"application/json": {
+											"example": "{ \"id\" : 1, \"name\" : \"obsY\" }\n"
+										}
+									}
+								},
+								"404": {
+									"description": "The fact was not found."
+								}
+							},
+							"method": "get"
+						}
+					],
+					"relativeUriPathSegments": [
+						"{observationId}"
+					],
+					"uriParameters": {
+						"observationId": {
+							"type": "string",
+							"required": true,
+							"displayName": "observationId"
+						}
+					}
+				}
+			],
+			"relativeUriPathSegments": [
+				"observations"
+			]
+		},
+		{
+			"description": "This is the list of available sensors.",
+			"relativeUri": "/sensors",
+			"methods": [
+				{
+					"description": "create sensor",
+					"protocols": [
+						"HTTPS"
+					],
+					"method": "post"
+				}
+			],
+			"resources": [
+				{
+					"relativeUri": "/{sensorId}",
 					"methods": [
 						{
 							"description": "Retrieve a sensor.",
@@ -148,24 +182,31 @@
 							"method": "get"
 						},
 						{
-							"description": "Create a sensor",
-							"method": "post"
+							"description": "update a sensor",
+							"method": "put"
+						},
+						{
+							"is": [
+								"private"
+							],
+							"description": "Delete a sensor.",
+							"method": "delete"
 						}
 					],
 					"relativeUriPathSegments": [
-						"{SensorId}"
+						"{sensorId}"
 					],
 					"uriParameters": {
-						"SensorId": {
+						"sensorId": {
 							"type": "string",
 							"required": true,
-							"displayName": "SensorId"
+							"displayName": "sensorId"
 						}
 					}
 				}
 			],
 			"relativeUriPathSegments": [
-				"Sensors"
+				"sensors"
 			]
 		}
 	],

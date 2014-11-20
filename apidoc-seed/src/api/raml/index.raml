@@ -9,8 +9,8 @@ mediaType: application/json
 traits:
   - private: !include _traits/private.raml
 
-/Facts:
-  description: This is a Facts.
+/facts:
+  description: List of a Facts.
   post:
     description: Create a fact. More text is only rendered in the details view of the method.
     body:
@@ -31,7 +31,7 @@ traits:
           Note that you can also add `<private>` blocks in here.
           </private>
 
-  /{FactId}:
+  /{factId}:
     get:
       description: Retrieve a fact.
       responses:
@@ -44,15 +44,33 @@ traits:
           description: The fact was not found.
     put:
       description: Update a fact
-  delete:
+    delete:
       is: [private]
-      description: Delete a fact.
+      description: Delete a sensor.
 
-/Observations:
-  description: This is the list of available observations
-/Sensors:
+/observations:
+  description: List of observations.
+  get:
+    description: list of observations
+    body:
+      application/json:
+        example: |
+          { "name" : "obsX" }
+
+  /{observationId}:
+    get:
+      description: Retrieve an observation.
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                { "id" : 1, "name" : "obsY" }
+        404:
+          description: The fact was not found.
+/sensors:
   description: This is the list of available sensors.
-  /{SensorId}:
+  /{sensorId}:
     get:
       description: Retrieve a sensor.
       responses:
@@ -63,10 +81,10 @@ traits:
                 { "id" : 1, "name" : "SensorName" }
         404:
           description: The sensor was not found.
-    post:
-      description: Create a sensor
-  put:
-    description: Modify an existing sensor
-  delete:
+    put:
+      description: update a sensor
+    delete:
       is: [private]
       description: Delete a sensor.
+  post:
+    description: create sensor
