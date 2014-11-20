@@ -1,0 +1,16 @@
+Sensors :
+
+{
+"id" : 1,
+"name" : "Sensor1",
+"description" : "Write a description here",
+"type" : "Type of the sensor",
+"visibility" : "Private or public"
+}
+
+Organisations :
+
+{
+"id" : 1,
+"name" : "Organisation1"
+}

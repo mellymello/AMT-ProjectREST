@@ -19,6 +19,25 @@
 			"relativeUri": "/sensors",
 			"methods": [
 				{
+					"is": [
+						"private"
+					],
+					"description": "Retrieve all sensors.",
+					"responses": {
+						"200": {
+							"body": {
+								"application/json": {
+									"example": "{\"id\" : 1, \"sensorName\" : \"Sensor1\", \"description\" : \"HEIG-VD's temperature sensor\", \"type\" : \"thermometer\", \"visibility\" : \"public\"}\n"
+								}
+							}
+						}
+					},
+					"protocols": [
+						"HTTPS"
+					],
+					"method": "get"
+				},
+				{
 					"description": "Create a sensor.",
 					"body": {
 						"application/json": {
@@ -29,7 +48,7 @@
 						"201": {
 							"body": {
 								"application/json": {
-									"example": "{\"id\" : 5, \"sensorName\" : \"Sensor1\", \"description\" : \"HEIG-VD's temperature sensor\", \"type\" : \"thermometer\", \"visibility\" : \"public\"}\n"
+									"example": "{\"id\" : 1, \"sensorName\" : \"Sensor1\", \"description\" : \"HEIG-VD's temperature sensor\", \"type\" : \"thermometer\", \"visibility\" : \"public\"}\n"
 								}
 							}
 						}
@@ -50,7 +69,7 @@
 								"200": {
 									"body": {
 										"application/json": {
-											"example": "{\"id\" : 5, \"sensorName\" : \"Sensor1\", \"description\" : \"HEIG-VD's temperature sensor\", \"type\" : \"thermometer\", \"visibility\" : \"public\"}\n"
+											"example": "{\"id\" : 1, \"sensorName\" : \"Sensor1\", \"description\" : \"HEIG-VD's temperature sensor\", \"type\" : \"thermometer\", \"visibility\" : \"public\"}\n"
 										}
 									}
 								},
