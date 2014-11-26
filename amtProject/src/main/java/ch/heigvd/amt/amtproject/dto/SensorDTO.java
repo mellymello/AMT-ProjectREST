@@ -6,6 +6,7 @@
 package ch.heigvd.amt.amtproject.dto;
 
 import ch.heigvd.amt.amtproject.model.*;
+import ch.heigvd.amt.amtproject.model.Sensor.Visibility;
 
 /**
  *

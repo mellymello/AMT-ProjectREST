@@ -6,9 +6,11 @@
 package ch.heigvd.amt.amtproject.api;
 
 
+import ch.heigvd.amt.amtproject.dto.OrganisationDTO;
 import ch.heigvd.amt.amtproject.model.Organisation;
 import ch.heigvd.amt.amtproject.model.User;
 import ch.heigvd.amt.amtproject.services.OrganisationManagerLocal;
+import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
@@ -37,35 +39,43 @@ public class OrganisationResource {
     
     @GET
     @Produces("application/json")
-    public List<Organisation> getAllOrganisations ()
+    public List<OrganisationDTO> getAllOrganisations ()
     {
-        List<Organisation> result = organisationManager.findAllOrganisations();
+        List<Organisation> organisations = organisationManager.findAllOrganisations();
+        List<OrganisationDTO> result = new LinkedList<>();
+        
+        for(Organisation organisation : organisations)
+        {
+            result.add(toDTO(organisation));
+        }
         return result;
-    }
-    
-    @POST
-    @Consumes("application/json")
-    public long createOrganisation (Organisation organisation)
-    {
-        long id = organisationManager.createOrganisation(organisation);
-        return id;
     }
     
     @Path("{/id}")
     @GET
     @Produces("application/json")
-    public Organisation getOrganisationDetails (@PathParam("id") long id)
+    public OrganisationDTO getOrganisationDetails (@PathParam("id") long id)
     {
         Organisation organisation = organisationManager.findOrganisationById(id);
-        return organisation;
+        return toDTO(organisation);
+    }
+    
+    @POST
+    @Consumes("application/json")
+    public long createOrganisation (OrganisationDTO organisationDTO)
+    {
+        Organisation newOrganisation = new Organisation();
+        long id = organisationManager.createOrganisation(toOrganisation(organisationDTO,newOrganisation));
+        return id;
     }
     
     @Path("{/id}")
     @PUT
     @Produces("application/json")
-    public void updateOrganisation (@PathParam("id") long id, Organisation organisation)
+    public void updateOrganisation (@PathParam("id") long id, OrganisationDTO dto)
     {
-        organisationManager.createOrganisation(organisation);
+        Organisation existing = organisationManager.findOrganisationById(id);
+        organisationManager.updateOrganisation(toOrganisation(dto, existing));
     }
     
     @Path("{/id}")
@@ -74,5 +84,19 @@ public class OrganisationResource {
     public void deleteOrganisation (@PathParam("id") long id)
     {
         organisationManager.deleteOrganisation(id);
+    }
+    
+    private OrganisationDTO toDTO(Organisation organisation) {
+        OrganisationDTO organisationDTO = new OrganisationDTO();
+        organisationDTO.setId(organisation.getId());
+        organisationDTO.setName(organisation.getName());
+        organisationDTO.setContactUser(organisation.getContactUser());
+        return organisationDTO;
+    }
+
+    private Organisation toOrganisation(OrganisationDTO organisationDTO, Organisation original) {
+        original.setName(organisationDTO.getName());
+        original.setContactUser(organisationDTO.getContactUser());        
+        return original;
     }
 }

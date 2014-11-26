@@ -16,7 +16,7 @@ import javax.ejb.Local;
 @Local
 public interface OrganisationManagerLocal {
     
-    Organisation findOrganisationById(long userId);
+    Organisation findOrganisationById(long organisationId);
 
     List<Organisation> findAllOrganisations();
 

@@ -105,9 +105,5 @@ public class UserResource {
         original.setEmail(userDTO.getEmail());
         original.setOrganisation(userDTO.getOrganisation());
         return original;
-        
     }
-    
-    
-    
 }
