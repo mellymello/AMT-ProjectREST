@@ -7,7 +7,13 @@ package ch.heigvd.amt.amtproject.model;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
@@ -15,6 +21,12 @@ import javax.persistence.Id;
  */
 
 @Entity
+@Table(name="sensor")
+@NamedQueries({
+    @NamedQuery(
+        name="findAllSensors",
+        query ="SELECT * FROM sensor")
+})
 public class Sensor implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -23,16 +35,18 @@ public class Sensor implements Serializable {
     private String description;
     private String type;
     private String visibility;
-    private long organisationId;
+    
+    @ManyToOne
+    private Organisation organisation;
     
 
-    public Sensor(long id, String name, String description, String type, String visibility, long org) {
+    public Sensor(long id, String name, String description, String type, String visibility, Organisation org) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.type = type;
         this.visibility = visibility;
-        this.organisationId = org;
+        this.organisation = org;
     }
     public Sensor () {}
 
@@ -56,12 +70,12 @@ public class Sensor implements Serializable {
         return visibility;
     }
 
-    public long getOrganisation() {
-        return organisationId;
+    public Organisation getOrganisation() {
+        return organisation;
     }
 
-    public void setOrganisation(long organisationId) {
-        this.organisationId = organisationId;
+    public void setOrganisation(Organisation organisation) {
+        this.organisation = organisation;
     }
 
     public void setId(long id) {
@@ -82,10 +96,6 @@ public class Sensor implements Serializable {
 
     public void setVisibility(String visibility) {
         this.visibility = visibility;
-    }
-    
-    
-   
-   
+    }  
     
 }

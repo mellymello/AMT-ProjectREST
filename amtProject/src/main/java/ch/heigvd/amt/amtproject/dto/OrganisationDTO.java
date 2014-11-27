@@ -6,6 +6,7 @@
 package ch.heigvd.amt.amtproject.dto;
 
 import ch.heigvd.amt.amtproject.model.*;
+import java.util.LinkedList;
 
 /**
  *
@@ -15,6 +16,7 @@ public class OrganisationDTO {
     private long id;
     private String name;
     private User contactUser;
+    LinkedList<Sensor> sensors = new LinkedList<>();
 
     public OrganisationDTO(long id, String name, User contactUser) {
         this.id = id;
@@ -46,6 +48,13 @@ public class OrganisationDTO {
 
     public void setContactUser(User contactUser) {
         this.contactUser = contactUser;
+    }
+        public LinkedList<Sensor> getSensors() {
+        return sensors;
+    }
+
+    public void setSensors(LinkedList<Sensor> sensors) {
+        this.sensors = sensors;
     }
     
 }

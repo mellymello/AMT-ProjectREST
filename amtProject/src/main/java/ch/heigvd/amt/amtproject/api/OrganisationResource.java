@@ -91,12 +91,14 @@ public class OrganisationResource {
         organisationDTO.setId(organisation.getId());
         organisationDTO.setName(organisation.getName());
         organisationDTO.setContactUser(organisation.getContactUser());
+        organisationDTO.setSensors(organisation.getSensors());
         return organisationDTO;
     }
 
     private Organisation toOrganisation(OrganisationDTO organisationDTO, Organisation original) {
         original.setName(organisationDTO.getName());
-        original.setContactUser(organisationDTO.getContactUser());        
+        original.setContactUser(organisationDTO.getContactUser());
+        original.setSensors(organisationDTO.getSensors());
         return original;
     }
 }

@@ -5,6 +5,10 @@
  */
 package ch.heigvd.amt.amtproject.model;
 
+import java.util.LinkedList;
+
+import javax.persistence.OneToMany;
+
 /**
  *
  * @author Calixte
@@ -13,11 +17,15 @@ public class Organisation {
     private long id;
     private String name;
     private User contactUser;
+    
+    @OneToMany(mappedBy="organisation")
+    LinkedList<Sensor> sensors = new LinkedList<>();
 
-    public Organisation(long id, String name, User contactUser) {
+    public Organisation(long id, String name, User contactUser, LinkedList<Sensor> s) {
         this.id = id;
         this.name = name;
         this.contactUser = contactUser;
+        this.sensors = s;
     }
     
     public Organisation () {}
@@ -45,5 +53,14 @@ public class Organisation {
     public void setContactUser(User contactUser) {
         this.contactUser = contactUser;
     }
+
+    public LinkedList<Sensor> getSensors() {
+        return sensors;
+    }
+
+    public void setSensors(LinkedList<Sensor> sensors) {
+        this.sensors = sensors;
+    }
+    
     
 }
