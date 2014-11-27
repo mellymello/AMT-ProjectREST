@@ -5,23 +5,41 @@
  */
 package ch.heigvd.amt.amtproject.model;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
 /**
  *
  * @author Calixte
  */
-public class User {
+@Entity
+@Table(name="amt_user")
+@NamedQueries({
+    @NamedQuery(
+        name="findAllUsers",
+        query ="SELECT * FROM user")
+})
+public class User implements Serializable {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     private String username;
     private String password;
     private String email;
-    private long organisationId;
+    private Organisation organisation;
 
-    public User(long id, String username, String password, String email, long org) {
+    public User(long id, String username, String password, String email, Organisation org) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.organisationId = org;
+        this.organisation = org;
     }
      
     public User (){}
@@ -42,8 +60,8 @@ public class User {
         return email;
     }
 
-    public long getOrganisation() {
-        return organisationId;
+    public Organisation getOrganisation() {
+        return organisation;
     }
     
 
@@ -63,8 +81,8 @@ public class User {
         this.email = email;
     }
 
-    public void setOrganisation(long organisationId) {
-        this.organisationId = organisationId;
+    public void setOrganisation(Organisation organisation) {
+        this.organisation = organisation;
     }
     
     

@@ -6,8 +6,12 @@
 package ch.heigvd.amt.amtproject.services;
 
 import ch.heigvd.amt.amtproject.model.Fact;
+import ch.heigvd.amt.amtproject.model.Sensor;
+import ch.heigvd.amt.amtproject.model.User;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -15,29 +19,34 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class FactManager implements FactManagerLocal {
+    
+    @PersistenceContext
+    EntityManager em;
 
     @Override
     public Fact findFactById(long factId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return em.find(Fact.class, factId);
     }
 
     @Override
     public List<Fact> findAllFacts() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return em.createNamedQuery("findAllFacts").getResultList();
     }
 
     @Override
     public long createFact(Fact fact) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.persist(fact);
+        em.flush();
+        return fact.getId();
     }
 
     @Override
     public void updateFact(Fact fact) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.merge(fact); 
     }
 
     @Override
-    public void deleteFact(long userId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void deleteFact(long factId) {
+        em.remove(em.find(Fact.class, factId));
     }
 }

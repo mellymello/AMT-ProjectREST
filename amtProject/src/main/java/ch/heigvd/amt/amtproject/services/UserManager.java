@@ -5,9 +5,12 @@
  */
 package ch.heigvd.amt.amtproject.services;
 
+import ch.heigvd.amt.amtproject.model.Sensor;
 import ch.heigvd.amt.amtproject.model.User;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -15,28 +18,35 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class UserManager implements UserManagerLocal {
+    
+    @PersistenceContext
+    EntityManager em;
 
     @Override
     public User findUserById(long userId) {
-        return null;
+        return em.find(User.class, userId);
     }
 
     @Override
     public List<User> findAllUser() {
-        return null;
+        return em.createNamedQuery("findAllUsers").getResultList();
     }
 
     @Override
     public long createUser(User user) {
-        return 0L;
+        em.persist(user);
+        em.flush();
+        return user.getId();
     }
 
     @Override
     public void updateUser(User user) {
+        em.merge(user);
     }
 
     @Override
     public void deleteUser(long userId) {
+        em.remove(em.find(User.class, userId));
     }
       
     

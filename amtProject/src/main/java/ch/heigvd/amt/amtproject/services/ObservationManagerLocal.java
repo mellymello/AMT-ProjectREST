@@ -23,5 +23,5 @@ public interface ObservationManagerLocal {
 
     void updateObservation(Observation observation);
 
-    void deleteObservation(long userId);
+    void deleteObservation(long obsId);
 }

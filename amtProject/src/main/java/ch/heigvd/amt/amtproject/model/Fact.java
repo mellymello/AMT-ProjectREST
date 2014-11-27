@@ -5,12 +5,30 @@
  */
 package ch.heigvd.amt.amtproject.model;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
 
 /**
  *
  * @author Calixte
  */
-public class Fact {
+@Entity
+@Table(name="fact")
+@NamedQueries({
+    @NamedQuery(
+        name="findAllFacts",
+        query ="SELECT * FROM fact")
+})
+public class Fact implements Serializable {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     private String info;
     private String type;

@@ -5,9 +5,12 @@
  */
 package ch.heigvd.amt.amtproject.services;
 
+import ch.heigvd.amt.amtproject.model.Fact;
 import ch.heigvd.amt.amtproject.model.Organisation;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -15,30 +18,35 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class OrganisationManager implements OrganisationManagerLocal {
+    
+    @PersistenceContext
+    EntityManager em;
 
     @Override
     public Organisation findOrganisationById(long organisationId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return em.find(Organisation.class, organisationId);
     }
 
     @Override
     public List<Organisation> findAllOrganisations() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return em.createNamedQuery("findAllOrganisations").getResultList();
     }
 
     @Override
     public long createOrganisation(Organisation organisation) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.persist(organisation);
+        em.flush();
+        return organisation.getId();
     }
 
     @Override
     public void updateOrganisation(Organisation organisation) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.merge(organisation);
     }
 
     @Override
     public void deleteOrganisation(long organisationId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.remove(em.find(Organisation.class, organisationId));
     }
 
     

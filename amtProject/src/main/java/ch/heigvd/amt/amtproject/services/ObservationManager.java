@@ -5,9 +5,12 @@
  */
 package ch.heigvd.amt.amtproject.services;
 
+
 import ch.heigvd.amt.amtproject.model.Observation;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -15,29 +18,34 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class ObservationManager implements ObservationManagerLocal {
+    
+    @PersistenceContext
+    EntityManager em;
 
     @Override
     public Observation findObservationById(long observationId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return em.find(Observation.class, observationId);
     }
 
     @Override
     public List<Observation> findAllObservations() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return em.createNamedQuery("findAllObservations").getResultList();
     }
 
     @Override
     public long createObservation(Observation observation) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.persist(observation);
+        em.flush();
+        return observation.getId();
     }
 
     @Override
     public void updateObservation(Observation observation) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.merge(observation); 
     }
 
     @Override
-    public void deleteObservation(long userId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void deleteObservation(long observationId) {
+        em.remove(em.find(Observation.class, observationId));
     }
 }
