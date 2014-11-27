@@ -5,22 +5,27 @@
  */
 package ch.heigvd.amt.amtproject.model;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  *
  * @author Calixte
  */
 
-public class Sensor {
+@Entity
+public class Sensor implements Serializable {
+    @Id
     private long id;
     private String name;
     private String description;
     private String type;
-    private Visibility visibility;
+    private String visibility;
     private long organisationId;
     
-   public enum Visibility { visible , invisible};
 
-    public Sensor(long id, String name, String description, String type, Visibility visibility, long org) {
+    public Sensor(long id, String name, String description, String type, String visibility, long org) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -46,7 +51,7 @@ public class Sensor {
         return type;
     }
 
-    public Visibility getVisibility() {
+    public String getVisibility() {
         return visibility;
     }
 
@@ -74,7 +79,7 @@ public class Sensor {
         this.type = type;
     }
 
-    public void setVisibility(Visibility visibility) {
+    public void setVisibility(String visibility) {
         this.visibility = visibility;
     }
     
