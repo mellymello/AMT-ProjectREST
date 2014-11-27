@@ -5,7 +5,6 @@
  */
 package ch.heigvd.amt.amtproject.model;
 
-import ch.heigvd.amt.amtproject.model.Sensor.Visibility;
 
 /**
  *
@@ -15,10 +14,10 @@ public class Fact {
     private long id;
     private String info;
     private String type;
-    private Visibility visibility;
+    private String visibility;
     private long organisationID;
 
-    public Fact(long id, String info, String type, Visibility visibility, long organisationID) {
+    public Fact(long id, String info, String type, String visibility, long organisationID) {
         this.id = id;
         this.info = info;
         this.type = type;
@@ -39,7 +38,7 @@ public class Fact {
         return type;
     }
 
-    public Visibility getVisibility() {
+    public String getVisibility() {
         return visibility;
     }
 
@@ -59,7 +58,7 @@ public class Fact {
         this.type = type;
     }
 
-    public void setVisibility(Visibility visibility) {
+    public void setVisibility(String visibility) {
         this.visibility = visibility;
     }
 

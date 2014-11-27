@@ -6,7 +6,6 @@
 package ch.heigvd.amt.amtproject.dto;
 
 import ch.heigvd.amt.amtproject.model.*;
-import ch.heigvd.amt.amtproject.model.Sensor.Visibility;
 
 /**
  *
@@ -18,11 +17,11 @@ public class SensorDTO {
     private String name;
     private String description;
     private String type;
-    private Visibility visibility;
+    private String visibility;
     private long organisationId;
     
 
-    public SensorDTO(long id, String name, String description, String type, Visibility visibility, long org) {
+    public SensorDTO(long id, String name, String description, String type, String visibility, long org) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -48,7 +47,7 @@ public class SensorDTO {
         return type;
     }
 
-    public Visibility getVisibility() {
+    public String getVisibility() {
         return visibility;
     }
 
@@ -76,7 +75,7 @@ public class SensorDTO {
         this.type = type;
     }
 
-    public void setVisibility(Visibility visibility) {
+    public void setVisibility(String visibility) {
         this.visibility = visibility;
     }
     
