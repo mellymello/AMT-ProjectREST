@@ -12,6 +12,7 @@ import ch.heigvd.amt.amtproject.services.OrganisationManagerLocal;
 import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -27,6 +28,9 @@ import javax.ws.rs.core.UriInfo;
  *
  * @author Zak
  */
+
+@Path("organisations")
+@Stateless
 public class OrganisationResource {
     @EJB
     OrganisationManagerLocal organisationManager;
@@ -50,7 +54,7 @@ public class OrganisationResource {
         return result;
     }
     
-    @Path("{/id}")
+    @Path("/{id}")
     @GET
     @Produces("application/json")
     public OrganisationDTO getOrganisationDetails (@PathParam("id") long id)
@@ -68,7 +72,7 @@ public class OrganisationResource {
         return id;
     }
     
-    @Path("{/id}")
+    @Path("/{id}")
     @PUT
     @Produces("application/json")
     public void updateOrganisation (@PathParam("id") long id, OrganisationDTO dto)
@@ -77,7 +81,7 @@ public class OrganisationResource {
         organisationManager.updateOrganisation(toOrganisation(dto, existing));
     }
     
-    @Path("{/id}")
+    @Path("/{id}")
     @DELETE
     @Produces("application/json")
     public void deleteOrganisation (@PathParam("id") long id)

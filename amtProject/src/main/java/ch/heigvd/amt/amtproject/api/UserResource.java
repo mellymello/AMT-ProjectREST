@@ -53,7 +53,7 @@ public class UserResource {
         return result;
     }
     
-    @Path("{/id}")
+    @Path("/{id}")
     @GET
     @Produces("application/json")
     public UserDTO getUserDetails (@PathParam("id") long id)
@@ -71,7 +71,7 @@ public class UserResource {
         return id;
     }  
     
-    @Path("{/id}")
+    @Path("/{id}")
     @PUT
     @Produces("application/json")
     public void updateUser (@PathParam("id") long id, UserDTO dto)
@@ -80,7 +80,7 @@ public class UserResource {
         userManager.updateUser(toUser(dto, existing));
     }
     
-    @Path("{/id}")
+    @Path("/{id}")
     @DELETE
     public void deleteUser (@PathParam("id") long id)
     {

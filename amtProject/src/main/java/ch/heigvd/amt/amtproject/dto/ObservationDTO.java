@@ -19,7 +19,6 @@ public class ObservationDTO {
     private Date time;
     private double value;
     private Sensor sensor;
-    LinkedList<Fact> facts = new LinkedList<>();
 
     public ObservationDTO(long id, Date time, double value, Sensor sensor) {
         this.id = id;
@@ -36,14 +35,6 @@ public class ObservationDTO {
 
     public void setSensor(Sensor sensor) {
         this.sensor = sensor;
-    }
-
-    public LinkedList<Fact> getFacts() {
-        return facts;
-    }
-
-    public void setFacts(LinkedList<Fact> facts) {
-        this.facts = facts;
     }
 
     public long getId() {

@@ -6,6 +6,7 @@
 package ch.heigvd.amt.amtproject.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.LinkedList;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,11 +23,11 @@ import javax.persistence.Table;
  * @author Calixte
  */
 @Entity
-@Table(name="organisation")
+@Table(name="Organisation")
 @NamedQueries({
     @NamedQuery(
         name="findAllOrganisations",
-        query ="SELECT * FROM organisation")
+        query ="SELECT o FROM Organisation o")
 })
 public class Organisation implements Serializable {
     @Id
@@ -36,15 +37,15 @@ public class Organisation implements Serializable {
     private User contactUser;
     
     @OneToMany(mappedBy="organisation")
-    LinkedList<Sensor> sensors = new LinkedList<>();
+    Collection<Sensor> sensors = new LinkedList<>();
     
     @OneToMany(mappedBy="organisation")
-    LinkedList<User> users = new LinkedList<>();
+    Collection<User> users = new LinkedList<>();
     
     @OneToMany(mappedBy="organisation")
-    LinkedList<Fact> facts = new LinkedList<>();
+    Collection<Fact> facts = new LinkedList<>();
     
-    public Organisation(long id, String name, User contactUser, LinkedList<Sensor> sensors, LinkedList<User> users, LinkedList<Fact> facts) {
+    public Organisation(long id, String name, User contactUser, Collection<Sensor> sensors, Collection<User> users, Collection<Fact> facts) {
         this.id = id;
         this.name = name;
         this.contactUser = contactUser;
@@ -55,19 +56,19 @@ public class Organisation implements Serializable {
     
     public Organisation () {}
 
-    public LinkedList<User> getUsers() {
+    public Collection<User> getUsers() {
         return users;
     }
 
-    public void setUsers(LinkedList<User> users) {
+    public void setUsers(Collection<User> users) {
         this.users = users;
     }
 
-    public LinkedList<Fact> getFacts() {
+    public Collection<Fact> getFacts() {
         return facts;
     }
 
-    public void setFacts(LinkedList<Fact> facts) {
+    public void setFacts(Collection<Fact> facts) {
         this.facts = facts;
     }
 
@@ -95,11 +96,11 @@ public class Organisation implements Serializable {
         this.contactUser = contactUser;
     }
 
-    public LinkedList<Sensor> getSensors() {
+    public Collection<Sensor> getSensors() {
         return sensors;
     }
 
-    public void setSensors(LinkedList<Sensor> sensors) {
+    public void setSensors(Collection<Sensor> sensors) {
         this.sensors = sensors;
     }
     

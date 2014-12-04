@@ -53,7 +53,7 @@ public class SensorResource {
         return result;
     }
     
-    @Path("{/id}")
+    @Path("/{id}")
     @GET
     @Produces("application/json")
     public SensorDTO getSensorDetails (@PathParam("id") long id)
@@ -71,7 +71,7 @@ public class SensorResource {
         return id;
     }  
     
-    @Path("{/id}")
+    @Path("/{id}")
     @PUT
     @Produces("application/json")
     public void updateSensor (@PathParam("id") long id, SensorDTO dto)
@@ -80,7 +80,7 @@ public class SensorResource {
         sensorManager.updateSensor(toSensor(dto, existing));
     }
     
-    @Path("{/id}")
+    @Path("/{id}")
     @DELETE
     public void deleteSensor (@PathParam("id") long id)
     {
@@ -95,7 +95,6 @@ public class SensorResource {
         sensorDTO.setType(sensor.getType());
         sensorDTO.setOrganisation(sensor.getOrganisation());
         sensorDTO.setVisibility(sensor.getVisibility());
-        sensorDTO.setObservations(sensor.getObservations());
 
         return sensorDTO;
     }
@@ -106,7 +105,6 @@ public class SensorResource {
         original.setType(sensorDTO.getType());
         original.setOrganisation(sensorDTO.getOrganisation());
         original.setVisibility(sensorDTO.getVisibility());
-        original.setObservations(sensorDTO.getObservations());
         
         return original;
     }

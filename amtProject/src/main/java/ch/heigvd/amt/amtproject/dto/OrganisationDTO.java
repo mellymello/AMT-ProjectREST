@@ -6,6 +6,7 @@
 package ch.heigvd.amt.amtproject.dto;
 
 import ch.heigvd.amt.amtproject.model.*;
+import java.util.Collection;
 import java.util.LinkedList;
 
 /**
@@ -16,11 +17,11 @@ public class OrganisationDTO {
     private long id;
     private String name;
     private User contactUser;
-    LinkedList<Sensor> sensors = new LinkedList<>();
-    LinkedList<User> users = new LinkedList<>();
-    LinkedList<Fact> facts = new LinkedList<>();
+    Collection<Sensor> sensors = new LinkedList<>();
+    Collection<User> users = new LinkedList<>();
+    Collection<Fact> facts = new LinkedList<>();
 
-    public OrganisationDTO(long id, String name, User contactUser, LinkedList<Sensor> sensors, LinkedList<User> users, LinkedList<Fact> facts) {
+    public OrganisationDTO(long id, String name, User contactUser, Collection<Sensor> sensors, Collection<User> users, Collection<Fact> facts) {
         this.id = id;
         this.name = name;
         this.contactUser = contactUser;
@@ -31,19 +32,19 @@ public class OrganisationDTO {
     
     public OrganisationDTO () {}
 
-    public LinkedList<User> getUsers() {
+    public Collection<User> getUsers() {
         return users;
     }
 
-    public void setUsers(LinkedList<User> users) {
+    public void setUsers(Collection<User> users) {
         this.users = users;
     }
 
-    public LinkedList<Fact> getFacts() {
+    public Collection<Fact> getFacts() {
         return facts;
     }
 
-    public void setFacts(LinkedList<Fact> facts) {
+    public void setFacts(Collection<Fact> facts) {
         this.facts = facts;
     }
 
@@ -70,11 +71,12 @@ public class OrganisationDTO {
     public void setContactUser(User contactUser) {
         this.contactUser = contactUser;
     }
-        public LinkedList<Sensor> getSensors() {
+    
+    public Collection<Sensor> getSensors() {
         return sensors;
     }
 
-    public void setSensors(LinkedList<Sensor> sensors) {
+    public void setSensors(Collection<Sensor> sensors) {
         this.sensors = sensors;
     }
     

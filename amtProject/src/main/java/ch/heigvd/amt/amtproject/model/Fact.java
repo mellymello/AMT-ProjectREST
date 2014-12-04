@@ -23,11 +23,11 @@ import javax.persistence.Table;
  * @author Calixte
  */
 @Entity
-@Table(name="fact")
+@Table(name="Fact")
 @NamedQueries({
     @NamedQuery(
         name="findAllFacts",
-        query ="SELECT * FROM fact")
+        query ="SELECT f FROM Fact f")
 })
 public class Fact implements Serializable {
     @Id
@@ -39,25 +39,13 @@ public class Fact implements Serializable {
     
     @ManyToOne
     private Organisation organisation;
-    
-    @ManyToMany(mappedBy="facts")
-    LinkedList<Observation> observations = new LinkedList<>();
 
-    public Fact(long id, String info, String type, String visibility, Organisation organisation, LinkedList<Observation> observations) {
+    public Fact(long id, String info, String type, String visibility, Organisation organisation) {
         this.id = id;
         this.info = info;
         this.type = type;
         this.visibility = visibility;
         this.organisation = organisation;
-        this.observations = observations;
-    }
-    
-    public LinkedList<Observation> getObservations() {
-        return observations;
-    }
-
-    public void setObservations(LinkedList<Observation> observations) {
-        this.observations = observations;
     }
     
     public Fact () {}

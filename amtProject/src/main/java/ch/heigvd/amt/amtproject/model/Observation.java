@@ -17,30 +17,31 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author Calixte
  */
 @Entity
-@Table(name="observation")
+@Table(name="Observation")
 @NamedQueries({
     @NamedQuery(
         name="findAllObservations",
-        query ="SELECT * FROM observation")
+        query ="SELECT o FROM Observation o")
 })
 public class Observation implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
+    
+    @Temporal(TemporalType.DATE)
     private Date time;
     private double value;
     
     @ManyToOne
     private Sensor sensor;
-    
-    @ManyToMany(mappedBy="observations")
-    LinkedList<Fact> facts = new LinkedList<>();
 
     public Observation(long id, Date time, double value, Sensor sensor) {
         this.id = id;
@@ -57,14 +58,6 @@ public class Observation implements Serializable {
 
     public void setSensor(Sensor sensor) {
         this.sensor = sensor;
-    }
-
-    public LinkedList<Fact> getFacts() {
-        return facts;
-    }
-
-    public void setFacts(LinkedList<Fact> facts) {
-        this.facts = facts;
     }
     
     public long getId() {

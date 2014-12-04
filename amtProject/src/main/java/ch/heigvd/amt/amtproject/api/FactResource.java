@@ -37,7 +37,7 @@ public class FactResource {
     
     public FactResource (){}
     
-    @Path("{/id}")
+    @Path("/{id}")
     @GET
     @Produces("application/json")
     public FactDTO getFactDetails (@PathParam("id") long id)
@@ -55,7 +55,7 @@ public class FactResource {
         return id;
     }  
     
-    @Path("{/id}")
+    @Path("/{id}")
     @PUT
     @Produces("application/json")
     public void updateFact (@PathParam("id") long id, FactDTO dto)
@@ -64,7 +64,7 @@ public class FactResource {
         factManager.updateFact(toFact(dto, existing));
     }
     
-    @Path("{/id}")
+    @Path("/{id}")
     @DELETE
     public void deleteFact (@PathParam("id") long id)
     {
@@ -78,7 +78,6 @@ public class FactResource {
         factDTO.setType(fact.getType());
         factDTO.setOrganisation(fact.getOrganisation());
         factDTO.setVisibility(fact.getVisibility());
-        factDTO.setObservations(fact.getObservations());
 
         return factDTO;
     }
@@ -88,7 +87,6 @@ public class FactResource {
         original.setType(factDTO.getType());
         original.setOrganisation(factDTO.getOrganisation());
         original.setVisibility(factDTO.getVisibility());
-        original.setObservations(factDTO.getObservations());
         
         return original;
     }

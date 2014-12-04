@@ -36,7 +36,7 @@ public class ObservationResource {
     
     public ObservationResource (){}
     
-    @Path("{/id}")
+    @Path("/{id}")
     @GET
     @Produces("application/json")
     public ObservationDTO getObservationDetails (@PathParam("id") long id)
@@ -54,7 +54,7 @@ public class ObservationResource {
         return id;
     }
     
-    @Path("{/id}")
+    @Path("/{id}")
     @DELETE
     public void deleteObservation (@PathParam("id") long id)
     {
@@ -66,7 +66,6 @@ public class ObservationResource {
         observationDTO.setId(observation.getId());
         observationDTO.setTime(observation.getTime());
         observationDTO.setValue(observation.getValue());
-        observationDTO.setFacts(observation.getFacts());
         observationDTO.setSensor(observation.getSensor());
         return observationDTO;
     }
@@ -74,7 +73,6 @@ public class ObservationResource {
     private Observation toObservation(ObservationDTO observationDTO, Observation original) {
         original.setTime(observationDTO.getTime());
         original.setValue(observationDTO.getValue());
-        original.setFacts(observationDTO.getFacts());
         original.setSensor(observationDTO.getSensor());
         return original;
     }

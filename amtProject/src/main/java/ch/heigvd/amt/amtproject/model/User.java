@@ -20,11 +20,11 @@ import javax.persistence.Table;
  * @author Calixte
  */
 @Entity
-@Table(name="amt_user")
+@Table(name="User")
 @NamedQueries({
     @NamedQuery(
         name="findAllUsers",
-        query ="SELECT * FROM amt_user")
+        query ="SELECT u FROM User u")
 })
 public class User implements Serializable {
     @Id
