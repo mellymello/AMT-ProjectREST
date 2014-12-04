@@ -95,6 +95,7 @@ public class SensorResource {
         sensorDTO.setType(sensor.getType());
         sensorDTO.setOrganisation(sensor.getOrganisation());
         sensorDTO.setVisibility(sensor.getVisibility());
+        sensorDTO.setObservations(sensor.getObservations());
 
         return sensorDTO;
     }
@@ -105,6 +106,7 @@ public class SensorResource {
         original.setType(sensorDTO.getType());
         original.setOrganisation(sensorDTO.getOrganisation());
         original.setVisibility(sensorDTO.getVisibility());
+        original.setObservations(sensorDTO.getObservations());
         
         return original;
     }

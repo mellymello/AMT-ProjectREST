@@ -6,6 +6,7 @@
 package ch.heigvd.amt.amtproject.dto;
 
 import ch.heigvd.amt.amtproject.model.*;
+import java.util.LinkedList;
 
 /**
  *
@@ -17,15 +18,25 @@ public class FactDTO {
     private String type;
     private String visibility;
     private Organisation organisation;
+    LinkedList<Observation> observations = new LinkedList<>();
 
-    public FactDTO(long id, String info, String type, String visibility, Organisation organisation) {
+    public FactDTO(long id, String info, String type, String visibility, Organisation organisation, LinkedList<Observation> observations) {
         this.id = id;
         this.info = info;
         this.type = type;
         this.visibility = visibility;
         this.organisation = organisation;
+        this.observations = observations;
     }
     public FactDTO () {}
+    
+    public LinkedList<Observation> getObservations() {
+        return observations;
+    }
+
+    public void setObservations(LinkedList<Observation> observations) {
+        this.observations = observations;
+    }
 
     public long getId() {
         return id;

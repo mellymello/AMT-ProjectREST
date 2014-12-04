@@ -66,12 +66,16 @@ public class ObservationResource {
         observationDTO.setId(observation.getId());
         observationDTO.setTime(observation.getTime());
         observationDTO.setValue(observation.getValue());
+        observationDTO.setFacts(observation.getFacts());
+        observationDTO.setSensor(observation.getSensor());
         return observationDTO;
     }
 
     private Observation toObservation(ObservationDTO observationDTO, Observation original) {
         original.setTime(observationDTO.getTime());
         original.setValue(observationDTO.getValue());
+        original.setFacts(observationDTO.getFacts());
+        original.setSensor(observationDTO.getSensor());
         return original;
     }
 }

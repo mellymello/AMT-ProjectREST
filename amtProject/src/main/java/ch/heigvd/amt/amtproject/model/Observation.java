@@ -7,10 +7,13 @@ package ch.heigvd.amt.amtproject.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedList;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -28,19 +31,42 @@ import javax.persistence.Table;
 })
 public class Observation implements Serializable {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
     private Date time;
     private double value;
+    
+    @ManyToOne
+    private Sensor sensor;
+    
+    @ManyToMany(mappedBy="observations")
+    LinkedList<Fact> facts = new LinkedList<>();
 
-    public Observation(long id, Date time, double value) {
+    public Observation(long id, Date time, double value, Sensor sensor) {
         this.id = id;
         this.time = time;
         this.value = value;
+        this.sensor = sensor;
     }
     
     public Observation () {}
 
+    public Sensor getSensor() {
+        return sensor;
+    }
+
+    public void setSensor(Sensor sensor) {
+        this.sensor = sensor;
+    }
+
+    public LinkedList<Fact> getFacts() {
+        return facts;
+    }
+
+    public void setFacts(LinkedList<Fact> facts) {
+        this.facts = facts;
+    }
+    
     public long getId() {
         return id;
     }

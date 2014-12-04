@@ -30,7 +30,7 @@ import javax.persistence.Table;
 })
 public class Organisation implements Serializable {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
     private String name;
     private User contactUser;
@@ -38,16 +38,38 @@ public class Organisation implements Serializable {
     @OneToMany(mappedBy="organisation")
     LinkedList<Sensor> sensors = new LinkedList<>();
     
+    @OneToMany(mappedBy="organisation")
     LinkedList<User> users = new LinkedList<>();
-
-    public Organisation(long id, String name, User contactUser, LinkedList<Sensor> s) {
+    
+    @OneToMany(mappedBy="organisation")
+    LinkedList<Fact> facts = new LinkedList<>();
+    
+    public Organisation(long id, String name, User contactUser, LinkedList<Sensor> sensors, LinkedList<User> users, LinkedList<Fact> facts) {
         this.id = id;
         this.name = name;
         this.contactUser = contactUser;
-        this.sensors = s;
+        this.sensors = sensors;
+        this.users = users;
+        this.facts = facts;
     }
     
     public Organisation () {}
+
+    public LinkedList<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(LinkedList<User> users) {
+        this.users = users;
+    }
+
+    public LinkedList<Fact> getFacts() {
+        return facts;
+    }
+
+    public void setFacts(LinkedList<Fact> facts) {
+        this.facts = facts;
+    }
 
     public long getId() {
         return id;

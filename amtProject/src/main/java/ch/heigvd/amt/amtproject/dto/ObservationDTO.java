@@ -5,7 +5,10 @@
  */
 package ch.heigvd.amt.amtproject.dto;
 
+import ch.heigvd.amt.amtproject.model.Fact;
+import ch.heigvd.amt.amtproject.model.Sensor;
 import java.util.Date;
+import java.util.LinkedList;
 
 /**
  *
@@ -15,14 +18,33 @@ public class ObservationDTO {
     private long id;
     private Date time;
     private double value;
+    private Sensor sensor;
+    LinkedList<Fact> facts = new LinkedList<>();
 
-    public ObservationDTO(long id, Date time, double value) {
+    public ObservationDTO(long id, Date time, double value, Sensor sensor) {
         this.id = id;
         this.time = time;
         this.value = value;
+        this.sensor = sensor;
     }
     
     public ObservationDTO () {}
+
+    public Sensor getSensor() {
+        return sensor;
+    }
+
+    public void setSensor(Sensor sensor) {
+        this.sensor = sensor;
+    }
+
+    public LinkedList<Fact> getFacts() {
+        return facts;
+    }
+
+    public void setFacts(LinkedList<Fact> facts) {
+        this.facts = facts;
+    }
 
     public long getId() {
         return id;

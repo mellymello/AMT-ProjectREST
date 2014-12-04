@@ -6,6 +6,7 @@
 package ch.heigvd.amt.amtproject.dto;
 
 import ch.heigvd.amt.amtproject.model.*;
+import java.util.LinkedList;
 
 /**
  *
@@ -19,17 +20,27 @@ public class SensorDTO {
     private String type;
     private String visibility;
     private Organisation organisation;
+    LinkedList<Observation> observations = new LinkedList<>();
     
 
-    public SensorDTO(long id, String name, String description, String type, String visibility, Organisation org) {
+    public SensorDTO(long id, String name, String description, String type, String visibility, Organisation org, LinkedList<Observation> observations) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.type = type;
         this.visibility = visibility;
         this.organisation = org;
+        this.observations = observations;
     }
     public SensorDTO () {}
+
+    public LinkedList<Observation> getObservations() {
+        return observations;
+    }
+
+    public void setObservations(LinkedList<Observation> observations) {
+        this.observations = observations;
+    }
 
     public long getId() {
         return id;

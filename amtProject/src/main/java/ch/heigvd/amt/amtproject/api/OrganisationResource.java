@@ -91,6 +91,8 @@ public class OrganisationResource {
         organisationDTO.setName(organisation.getName());
         organisationDTO.setContactUser(organisation.getContactUser());
         organisationDTO.setSensors(organisation.getSensors());
+        organisationDTO.setUsers(organisation.getUsers());
+        organisationDTO.setFacts(organisation.getFacts());
         return organisationDTO;
     }
 
@@ -98,6 +100,8 @@ public class OrganisationResource {
         original.setName(organisationDTO.getName());
         original.setContactUser(organisationDTO.getContactUser());
         original.setSensors(organisationDTO.getSensors());
+        original.setUsers(organisationDTO.getUsers());
+        original.setFacts(organisationDTO.getFacts());
         return original;
     }
 }

@@ -78,6 +78,7 @@ public class FactResource {
         factDTO.setType(fact.getType());
         factDTO.setOrganisation(fact.getOrganisation());
         factDTO.setVisibility(fact.getVisibility());
+        factDTO.setObservations(fact.getObservations());
 
         return factDTO;
     }
@@ -87,6 +88,7 @@ public class FactResource {
         original.setType(factDTO.getType());
         original.setOrganisation(factDTO.getOrganisation());
         original.setVisibility(factDTO.getVisibility());
+        original.setObservations(factDTO.getObservations());
         
         return original;
     }
