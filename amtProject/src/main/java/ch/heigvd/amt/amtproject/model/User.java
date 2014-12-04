@@ -23,7 +23,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(
         name="findAllUsers",
-        query ="SELECT * FROM user")
+        query ="SELECT * FROM amt_user")
 })
 public class User implements Serializable {
     @Id
