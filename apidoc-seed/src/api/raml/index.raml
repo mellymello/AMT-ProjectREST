@@ -98,19 +98,6 @@ traits:
               Succesfully deleted observation
 
 /facts:
-  description: Fact's list.
-  post:
-    description: Create a fact.
-    body:
-      application/json:
-        example: |
-          {"info" : "Average temperature in Lausanne is 20°C", "type" : "Temperature", "visibility" : "public"}
-    responses:
-      201:
-        body:
-          application/json:
-            example: |
-              {"id" : 20, "info" : "Average temperature in Lausanne is 20°C", "type" : "Temperature", "visibility" : "public"}
   /{factId}:
     get:
       description: Retrieve a fact.
