@@ -6,10 +6,7 @@
 package ch.heigvd.amt.amtproject.api;
 
 import ch.heigvd.amt.amtproject.dto.SensorDTO;
-import ch.heigvd.amt.amtproject.dto.SensorDTO;
 import ch.heigvd.amt.amtproject.model.Sensor;
-import ch.heigvd.amt.amtproject.model.Sensor;
-import ch.heigvd.amt.amtproject.services.SensorManagerLocal;
 import ch.heigvd.amt.amtproject.services.SensorManagerLocal;
 import java.util.LinkedList;
 import java.util.List;

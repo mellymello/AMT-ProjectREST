@@ -6,8 +6,6 @@
 package ch.heigvd.amt.amtproject.services;
 
 import ch.heigvd.amt.amtproject.model.Fact;
-import ch.heigvd.amt.amtproject.model.Sensor;
-import ch.heigvd.amt.amtproject.model.User;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

@@ -16,14 +16,14 @@ public class FactDTO {
     private String info;
     private String type;
     private String visibility;
-    private long organisationID;
+    private Organisation organisation;
 
-    public FactDTO(long id, String info, String type, String visibility, long organisationID) {
+    public FactDTO(long id, String info, String type, String visibility, Organisation organisation) {
         this.id = id;
         this.info = info;
         this.type = type;
         this.visibility = visibility;
-        this.organisationID = organisationID;
+        this.organisation = organisation;
     }
     public FactDTO () {}
 
@@ -43,8 +43,8 @@ public class FactDTO {
         return visibility;
     }
 
-    public long getOrganisationID() {
-        return organisationID;
+    public Organisation getOrganisation() {
+        return organisation;
     }
 
     public void setId(long id) {
@@ -63,7 +63,7 @@ public class FactDTO {
         this.visibility = visibility;
     }
 
-    public void setOrganisationID(long organisationID) {
-        this.organisationID = organisationID;
+    public void setOrganisation(Organisation organisation) {
+        this.organisation = organisation;
     }  
 }

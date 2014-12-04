@@ -5,7 +5,6 @@
  */
 package ch.heigvd.amt.amtproject.services;
 
-import ch.heigvd.amt.amtproject.model.Sensor;
 import ch.heigvd.amt.amtproject.model.User;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -48,6 +47,4 @@ public class UserManager implements UserManagerLocal {
     public void deleteUser(long userId) {
         em.remove(em.find(User.class, userId));
     }
-      
-    
 }

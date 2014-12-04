@@ -8,7 +8,6 @@ package ch.heigvd.amt.amtproject.api;
 
 import ch.heigvd.amt.amtproject.dto.OrganisationDTO;
 import ch.heigvd.amt.amtproject.model.Organisation;
-import ch.heigvd.amt.amtproject.model.User;
 import ch.heigvd.amt.amtproject.services.OrganisationManagerLocal;
 import java.util.LinkedList;
 import java.util.List;

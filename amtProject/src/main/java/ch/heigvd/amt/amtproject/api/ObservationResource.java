@@ -6,20 +6,14 @@
 package ch.heigvd.amt.amtproject.api;
 
 import ch.heigvd.amt.amtproject.dto.ObservationDTO;
-import ch.heigvd.amt.amtproject.dto.ObservationDTO;
-import ch.heigvd.amt.amtproject.model.Observation;
 import ch.heigvd.amt.amtproject.model.Observation;
 import ch.heigvd.amt.amtproject.services.ObservationManagerLocal;
-import ch.heigvd.amt.amtproject.services.ObservationManagerLocal;
-import java.util.LinkedList;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;

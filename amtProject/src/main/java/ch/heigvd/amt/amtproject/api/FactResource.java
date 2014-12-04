@@ -6,13 +6,8 @@
 package ch.heigvd.amt.amtproject.api;
 
 import ch.heigvd.amt.amtproject.dto.FactDTO;
-import ch.heigvd.amt.amtproject.dto.FactDTO;
-import ch.heigvd.amt.amtproject.model.Fact;
 import ch.heigvd.amt.amtproject.model.Fact;
 import ch.heigvd.amt.amtproject.services.FactManagerLocal;
-import ch.heigvd.amt.amtproject.services.FactManagerLocal;
-import java.util.LinkedList;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
@@ -81,7 +76,7 @@ public class FactResource {
         factDTO.setId(fact.getId());
         factDTO.setInfo(fact.getInfo());
         factDTO.setType(fact.getType());
-        factDTO.setOrganisationID(fact.getOrganisationID());
+        factDTO.setOrganisation(fact.getOrganisation());
         factDTO.setVisibility(fact.getVisibility());
 
         return factDTO;
@@ -90,7 +85,7 @@ public class FactResource {
     private Fact toFact(FactDTO factDTO, Fact original) {
         original.setInfo(factDTO.getInfo());
         original.setType(factDTO.getType());
-        original.setOrganisationID(factDTO.getOrganisationID());
+        original.setOrganisation(factDTO.getOrganisation());
         original.setVisibility(factDTO.getVisibility());
         
         return original;

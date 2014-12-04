@@ -5,7 +5,6 @@
  */
 package ch.heigvd.amt.amtproject.dto;
 
-import ch.heigvd.amt.amtproject.model.*;
 import java.util.Date;
 
 /**

@@ -5,7 +5,6 @@
  */
 package ch.heigvd.amt.amtproject.services;
 
-import ch.heigvd.amt.amtproject.model.Fact;
 import ch.heigvd.amt.amtproject.model.Organisation;
 import java.util.List;
 import javax.ejb.Stateless;
