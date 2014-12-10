@@ -7,22 +7,27 @@ package ch.heigvd.amt.amtproject.api;
 
 import ch.heigvd.amt.amtproject.services.TestManagerLocal;
 import javax.ejb.EJB;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
+import javax.ejb.Stateless;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+
 
 /**
  *
  * @author Calixte
  */
+@Path("generate")
+@Stateless
 public class TestResource {
+    
     @EJB
-    TestManagerLocal testManager;
-    
-    @Context
-    private UriInfo context;
-    
-    public TestResource (){}
+    private TestManagerLocal testManager;
 
+    @GET
+    public String generateTestData() {
+        testManager.generateData();
+        return "Data generated.";
+    }
 
     
 
