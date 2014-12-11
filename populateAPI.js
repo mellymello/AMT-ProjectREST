@@ -5,10 +5,10 @@ var fs = require('fs');
 
 var port = 8080; 
 var hostname = '10.192.86.146';  
-var pathPOSTObs = '/amtProject/api/observations'; 
+var pathPOSTObs = '/amtProject/v1/api/observations'; 
 
 var postObs = function(id){
-	var post_data = '{"time":"'+new Date().toJSON()+'", "value":'+Math.floor((Math.random() * 100) + 1)+',"sensor":'+null+'}'; 
+	var post_data = '{"time":"'+new Date().toJSON()+'", "value":'+Math.floor((Math.random() * 100) + 1)+',"sensor":'+Math.floor((Math.random() * 100) + 1)+'}'; 
 	  // An object of options to indicate where to post to
 	  var post_options = {
 		  host: hostname,
