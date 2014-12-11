@@ -1,4 +1,4 @@
-Sensor REST-API
+AMT REST-API
 ===============
 
 #Description
