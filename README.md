@@ -10,6 +10,7 @@ The sensor generate observation and we create facts from these observations. The
   * Adapt the pathes in the script autoConfiScript.sh or you can create a "ConnectionPool" and a "JDBC with "asadmin" directly, you can find the names of all the elements in the script
   * Start the domain with asadmin
   * Start Netbeans and start the project
+ 
 # Test Data
   * The application contains already some data, so you can test and play with it
   * If you go to : localhost:8080/amtProject/v1/api/generate, the data will be generetad for you.
