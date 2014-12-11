@@ -19,16 +19,16 @@ public class SensorDTO {
     private String description;
     private String type;
     private String visibility;
-    private Organisation organisation;
+    private long organisationId;
     
 
-    public SensorDTO(long id, String name, String description, String type, String visibility, Organisation org) {
+    public SensorDTO(long id, String name, String description, String type, String visibility, long organisationId) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.type = type;
         this.visibility = visibility;
-        this.organisation = org;
+        this.organisationId = organisationId;
     }
     public SensorDTO () {}
 
@@ -52,12 +52,12 @@ public class SensorDTO {
         return visibility;
     }
 
-    public Organisation getOrganisation() {
-        return organisation;
+    public long getOrganisation() {
+        return organisationId;
     }
 
-    public void setOrganisation(Organisation organisation) {
-        this.organisation = organisation;
+    public void setOrganisation(long organisationId) {
+        this.organisationId = organisationId;
     }
 
     public void setId(long id) {

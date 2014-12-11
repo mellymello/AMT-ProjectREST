@@ -7,6 +7,7 @@ package ch.heigvd.amt.amtproject.api;
 
 import ch.heigvd.amt.amtproject.dto.SensorDTO;
 import ch.heigvd.amt.amtproject.model.Sensor;
+import ch.heigvd.amt.amtproject.services.OrganisationManagerLocal;
 import ch.heigvd.amt.amtproject.services.SensorManagerLocal;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,6 +34,9 @@ import javax.ws.rs.core.UriInfo;
 public class SensorResource {
     @EJB
     SensorManagerLocal sensorManager;
+    
+    @EJB
+    OrganisationManagerLocal organisationManager;
     
     @Context
     private UriInfo context;
@@ -93,7 +97,7 @@ public class SensorResource {
         sensorDTO.setName(sensor.getName());
         sensorDTO.setDescription(sensor.getDescription());
         sensorDTO.setType(sensor.getType());
-        sensorDTO.setOrganisation(sensor.getOrganisation());
+        sensorDTO.setOrganisation(sensor.getOrganisation().getId());
         sensorDTO.setVisibility(sensor.getVisibility());
 
         return sensorDTO;
@@ -103,7 +107,7 @@ public class SensorResource {
         original.setName(sensorDTO.getName());
         original.setDescription(sensorDTO.getDescription());
         original.setType(sensorDTO.getType());
-        original.setOrganisation(sensorDTO.getOrganisation());
+        original.setOrganisation(organisationManager.findOrganisationById(sensorDTO.getOrganisation()));
         original.setVisibility(sensorDTO.getVisibility());
         
         return original;

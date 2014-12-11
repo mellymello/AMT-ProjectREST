@@ -9,6 +9,8 @@ import ch.heigvd.amt.amtproject.model.Fact;
 import ch.heigvd.amt.amtproject.model.Sensor;
 import java.util.Date;
 import java.util.LinkedList;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -18,23 +20,23 @@ public class ObservationDTO {
     private long id;
     private Date time;
     private double value;
-    private Sensor sensor;
+    private long sensorId;
 
-    public ObservationDTO(long id, Date time, double value, Sensor sensor) {
+    public ObservationDTO(long id, Date time, double value, long sensorId) {
         this.id = id;
         this.time = time;
         this.value = value;
-        this.sensor = sensor;
+        this.sensorId = sensorId;
     }
     
     public ObservationDTO () {}
 
-    public Sensor getSensor() {
-        return sensor;
+    public long getSensorId() {
+        return sensorId;
     }
 
-    public void setSensor(Sensor sensor) {
-        this.sensor = sensor;
+    public void setSensorId(long sensorId) {
+        this.sensorId = sensorId;
     }
 
     public long getId() {
@@ -60,6 +62,4 @@ public class ObservationDTO {
     public void setValue(double value) {
         this.value = value;
     }
-    
-    
 }

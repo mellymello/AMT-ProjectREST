@@ -10,6 +10,9 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.UriInfo;
 
 
 /**
@@ -22,8 +25,14 @@ public class TestResource {
     
     @EJB
     private TestManagerLocal testManager;
+    
+    @Context
+    private UriInfo context;
+
+    public TestResource() {}
 
     @GET
+    @Produces("application/json")
     public String generateTestData() {
         testManager.generateData();
         return "Data generated.";

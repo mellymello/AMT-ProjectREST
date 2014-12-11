@@ -7,6 +7,7 @@ package ch.heigvd.amt.amtproject.api;
 
 import ch.heigvd.amt.amtproject.dto.UserDTO;
 import ch.heigvd.amt.amtproject.model.User;
+import ch.heigvd.amt.amtproject.services.OrganisationManagerLocal;
 import ch.heigvd.amt.amtproject.services.UserManagerLocal;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,6 +34,9 @@ public class UserResource {
     
     @EJB
     UserManagerLocal userManager;
+    
+    @EJB
+    OrganisationManagerLocal organisationManager;
     
     @Context
     private UriInfo context;
@@ -92,7 +96,7 @@ public class UserResource {
         userDTO.setId(user.getId());
         userDTO.setUsername(user.getUsername());
         userDTO.setEmail(user.getEmail());
-        userDTO.setOrganisation(user.getOrganisation());
+        userDTO.setOrganisation(user.getOrganisation().getId());
         return userDTO;
     }
 
@@ -100,7 +104,7 @@ public class UserResource {
         original.setId(userDTO.getId());
         original.setUsername(userDTO.getUsername());
         original.setEmail(userDTO.getEmail());
-        original.setOrganisation(userDTO.getOrganisation());
+        original.setOrganisation(organisationManager.findOrganisationById(userDTO.getOrganisation()));
         return original;
     }
 }

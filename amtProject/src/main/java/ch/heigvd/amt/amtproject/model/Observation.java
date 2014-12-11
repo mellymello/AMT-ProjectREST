@@ -36,7 +36,7 @@ public class Observation implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
     
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date time;
     private double value;
     

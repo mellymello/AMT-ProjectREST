@@ -15,13 +15,13 @@ public class UserDTO {
     private long id;
     private String username;
     private String email;
-    private Organisation organisation;
+    private long organisationId;
 
-    public UserDTO(long id, String username, String email, Organisation organisation) {
+    public UserDTO(long id, String username, String email, long organisationId) {
         this.id = id;
         this.username = username;
         this.email = email;
-        this.organisation = organisation;
+        this.organisationId = organisationId;
     }
     
     public UserDTO () {}
@@ -38,8 +38,8 @@ public class UserDTO {
         return email;
     }
 
-    public Organisation getOrganisation() {
-        return organisation;
+    public long getOrganisation() {
+        return organisationId;
     }
 
     public void setId(long id) {
@@ -54,9 +54,7 @@ public class UserDTO {
         this.email = email;
     }
 
-    public void setOrganisation(Organisation organisation) {
-        this.organisation = organisation;
+    public void setOrganisation(long organisationId) {
+        this.organisationId = organisationId;
     }
-     
-    
 }
