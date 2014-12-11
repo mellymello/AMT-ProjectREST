@@ -1,7 +1,5 @@
 AMT REST-API
 ===============
-
-#Description
 We offer a Saas platform for organisations. You can manage users, sensors, and your organisation.
 The sensor generate observation and we create facts from these observations. The facts help you to analyse the results you aggregate.
 
