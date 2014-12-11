@@ -20,4 +20,4 @@ The sensor generate observation and we create facts from these observations. The
 You can find the detailled documentation about our API here : http://mellymello.github.io/AMT-ProjectREST
 
 #Authors
-Melly Calixte & SAAM Frederic
+Melly Calixte & Saam Frederic
