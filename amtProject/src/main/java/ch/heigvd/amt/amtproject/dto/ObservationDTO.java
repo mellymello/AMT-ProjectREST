@@ -1,21 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/**
+ * @Authors : Melly Calixte And Saam Frederic
+ * @Name : ObservationDTO.java
+ * @Description : DTO for the observations
+ * @Version 1.0
+ **/
 package ch.heigvd.amt.amtproject.dto;
 
-import ch.heigvd.amt.amtproject.model.Fact;
-import ch.heigvd.amt.amtproject.model.Sensor;
-import java.util.Date;
-import java.util.LinkedList;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-/**
- *
- * @author Calixte
- */
+import java.util.Date;
+
+
 public class ObservationDTO {
     private long id;
     private Date time;

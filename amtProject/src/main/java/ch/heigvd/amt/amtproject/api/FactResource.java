@@ -1,8 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/**
+ * @Authors : Melly Calixte And Saam Frederic
+ * @Name : factResource.java
+ * @Description : Specifiy the resources for the facts
+ * @Version 1.0
+ **/
+
 package ch.heigvd.amt.amtproject.api;
 
 import ch.heigvd.amt.amtproject.dto.FactDTO;
@@ -13,8 +15,6 @@ import ch.heigvd.amt.amtproject.services.SensorManagerLocal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
@@ -29,11 +29,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-
-/**
- *
- * @author Calixte
- */
 
 @Path("facts")
 @Stateless

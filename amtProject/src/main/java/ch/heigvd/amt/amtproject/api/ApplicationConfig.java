@@ -1,17 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+/**
+ * @Authors : Melly Calixte And Saam Frederic
+ * @Name : ApplicationConfig.java
+ * @Description : Get the resources and specify the path
+ * @Version 1.0
+ **/
+
 package ch.heigvd.amt.amtproject.api;
 
 import java.util.Set;
 import javax.ws.rs.core.Application;
 
-/**
- *
- * @author Calixte
- */
+
 @javax.ws.rs.ApplicationPath("v1/api")
 public class ApplicationConfig extends Application {
     

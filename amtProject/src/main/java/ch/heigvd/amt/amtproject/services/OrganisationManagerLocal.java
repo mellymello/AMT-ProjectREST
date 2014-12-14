@@ -1,18 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/**
+ * @Authors : Melly Calixte And Saam Frederic
+ * @Name : OrganisationManagerLocal.java
+ * @Description : Business layer for the Organisations
+ * @Version 1.0
+ **/
 package ch.heigvd.amt.amtproject.services;
 
 import ch.heigvd.amt.amtproject.model.Organisation;
 import java.util.List;
 import javax.ejb.Local;
 
-/**
- *
- * @author Zak
- */
+
 @Local
 public interface OrganisationManagerLocal {
     

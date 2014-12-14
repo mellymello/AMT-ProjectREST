@@ -1,19 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/**
+ * @Authors : Melly Calixte And Saam Frederic
+ * @Name : Fact.java
+ * @Description : Model of the facts
+ * @Version 1.0
+ **/
+
 package ch.heigvd.amt.amtproject.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -22,10 +22,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 
-/**
- *
- * @author Calixte
- */
 @Entity
 @Table(name="Fact")
 @NamedQueries({

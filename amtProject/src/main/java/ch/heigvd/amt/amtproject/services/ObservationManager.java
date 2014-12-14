@@ -1,15 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/**
+ * @Authors : Melly Calixte And Saam Frederic
+ * @Name : ObservationManager.java
+ * @Description : Business layer for the observations
+ * @Version 1.0
+ **/
 package ch.heigvd.amt.amtproject.services;
 
 
 import ch.heigvd.amt.amtproject.model.Fact;
 import ch.heigvd.amt.amtproject.model.Observation;
 import ch.heigvd.amt.amtproject.model.Sensor;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
@@ -20,10 +20,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TemporalType;
 
-/**
- *
- * @author Zak
- */
+
 @Stateless
 public class ObservationManager implements ObservationManagerLocal {
     
@@ -60,6 +57,7 @@ public class ObservationManager implements ObservationManagerLocal {
         return calendar.getTime();
     }
 
+    @Override
     public Date getStartOfDay(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -79,14 +77,14 @@ public class ObservationManager implements ObservationManagerLocal {
         Fact f = factManager.findFactBySensorAndType(observation.getSensor(), "counter");
         if (f != null) {
             List<Double> oldValue = f.getInfo();
-            List<Double> newValue = new LinkedList<Double>();
+            List<Double> newValue = new LinkedList<>();
             Double d = oldValue.get(0);
             d = d + 1;
             newValue.add(d);
             f.setInfo(newValue);
         }
         else {
-            List<Double> info = new LinkedList<Double>();
+            List<Double> info = new LinkedList<>();
             info.add(1.0);
             f = new Fact(info, "counter", "public", observation.getSensor().getOrganisation(), observation.getSensor(), new Date());
             factManager.createFact(f);
@@ -96,7 +94,7 @@ public class ObservationManager implements ObservationManagerLocal {
         Fact f1 = factManager.findFactBySensorTypeAndDate(observation.getSensor(), "daily", new Date());
         if (f1 != null) {
             List<Double> oldValue = f1.getInfo();
-            List<Double> newValue = new LinkedList<Double>();
+            List<Double> newValue = new LinkedList<>();
             
             Double min = oldValue.get(0);
             Double max = oldValue.get(1);
@@ -118,7 +116,7 @@ public class ObservationManager implements ObservationManagerLocal {
             f1.setInfo(newValue);
         }
         else {
-            List<Double> list = new LinkedList<Double>();
+            List<Double> list = new LinkedList<>();
             list.add(observation.getValue()); //Adding MIN value
             list.add(observation.getValue()); //Adding MAX value
             list.add(observation.getValue()); //Adding AVERAGE value

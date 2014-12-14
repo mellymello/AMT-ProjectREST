@@ -1,8 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/**
+ * @Authors : Melly Calixte And Saam Frederic
+ * @Name : SensorManager.java
+ * @Description : Business layer for the sensors
+ * @Version 1.0
+ **/
 package ch.heigvd.amt.amtproject.services;
 
 import ch.heigvd.amt.amtproject.model.Sensor;
@@ -11,10 +12,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-/**
- *
- * @author Calixte
- */
+
 @Stateless
 public class SensorManager implements SensorManagerLocal {
 

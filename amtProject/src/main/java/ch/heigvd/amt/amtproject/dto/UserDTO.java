@@ -1,16 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/**
+ * @Authors : Melly Calixte And Saam Frederic
+ * @Name : UserDTO.java
+ * @Description : DTO for the users
+ * @Description : 
+ * @Version 1.0
+ **/
 package ch.heigvd.amt.amtproject.dto;
 
-import ch.heigvd.amt.amtproject.model.Organisation;
 
-/**
- *
- * @author Calixte
- */
 public class UserDTO {
     private long id;
     private String username;

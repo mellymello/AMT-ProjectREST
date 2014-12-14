@@ -1,19 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/**
+ * @Authors : Melly Calixte And Saam Frederic
+ * @Name : FactDTO.java
+ * @Description : DTO for the facts
+ * @Version 1.0
+ **/
 package ch.heigvd.amt.amtproject.dto;
 
-import ch.heigvd.amt.amtproject.model.*;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
-/**
- *
- * @author Calixte
- */
+
 public class FactDTO {
     private long id;
     private List<Double> info;

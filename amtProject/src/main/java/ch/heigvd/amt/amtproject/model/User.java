@@ -1,8 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/**
+ * @Authors : Melly Calixte And Saam Frederic
+ * @Name : User.java
+ * @Description : Model for the Users
+ * @Version 1.0
+ **/
 package ch.heigvd.amt.amtproject.model;
 
 import java.io.Serializable;
@@ -15,10 +16,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-/**
- *
- * @author Calixte
- */
+
 @Entity
 @Table(name="User")
 @NamedQueries({

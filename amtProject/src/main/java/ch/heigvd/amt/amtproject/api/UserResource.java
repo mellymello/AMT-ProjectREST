@@ -1,8 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/**
+ * @Authors : Melly Calixte And Saam Frederic
+ * @Name : UserResource.java
+ * @Description : Specifiy the resources for the users
+ * @Version 1.0
+ **/
 package ch.heigvd.amt.amtproject.api;
 
 import ch.heigvd.amt.amtproject.dto.UserDTO;
@@ -24,10 +25,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 
-/**
- *
- * @author Calixte
- */
+
 @Path("users")
 @Stateless
 public class UserResource {
