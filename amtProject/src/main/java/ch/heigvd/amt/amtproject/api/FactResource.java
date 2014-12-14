@@ -10,16 +10,23 @@ import ch.heigvd.amt.amtproject.model.Fact;
 import ch.heigvd.amt.amtproject.services.FactManagerLocal;
 import ch.heigvd.amt.amtproject.services.OrganisationManagerLocal;
 import ch.heigvd.amt.amtproject.services.SensorManagerLocal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 
@@ -44,6 +51,35 @@ public class FactResource {
     private UriInfo context;
     
     public FactResource (){}
+    
+    @GET
+    @Produces("application/json")
+    public FactDTO getFactByParam (@QueryParam("sensor") Long sensorId, @QueryParam("type") String type, @DefaultValue("empty") @QueryParam("date") String textDate)
+    {
+        Date date = new Date();
+        
+        // Parsing date
+        if (!textDate.equals("empty")) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                date = sdf.parse(textDate);
+            } catch (ParseException ex) {
+                return null;
+            }
+        }
+        
+        // Selecting the choosen type of fact
+        Fact fact = new Fact();
+        if (sensorId != null && type != null) {
+            if (type.equals("counter")) {
+                return toDTO(factManager.findFactBySensorAndType(sensorManager.findSensorById(sensorId), type));
+            }
+            else if (type.equals("daily")) {
+                return toDTO(factManager.findFactBySensorTypeAndDate(sensorManager.findSensorById(sensorId), type, date));
+            }
+        }
+        return null;
+    }
     
     @Path("/{id}")
     @GET

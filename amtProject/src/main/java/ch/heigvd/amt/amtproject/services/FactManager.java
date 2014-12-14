@@ -53,6 +53,7 @@ public class FactManager implements FactManagerLocal {
         em.remove(em.find(Fact.class, factId));
     }
 
+    // Method used to find "Counter" type of facts
     @Override
     public Fact findFactBySensorAndType(Sensor sensor, String type) {
         try {
@@ -63,6 +64,7 @@ public class FactManager implements FactManagerLocal {
         }
     }
     
+    // Method used to find "Daily" type of facts
     @Override
     public Fact findFactBySensorTypeAndDate(Sensor sensor, String type, Date date) {
         try {
