@@ -28,17 +28,17 @@
           <h1>Resources</h1>
           <hr>
           <ul class="nav subnav">
-            <li><a href="./#sensors"><span>/sensors</span></a></li>
-            <li><a href="./#observations"><span>/observations</span></a></li>
-            <li><a href="./#facts"><span>/facts</span></a></li>
-            <li><a href="./#users"><span>/users</span></a></li>
-            <li><a href="./#organisations"><span>/organisations</span></a></li>
+            <li><a href="/AMT-ProjectREST/api/reference/#sensors"><span>/sensors</span></a></li>
+            <li><a href="/AMT-ProjectREST/api/reference/#observations"><span>/observations</span></a></li>
+            <li><a href="/AMT-ProjectREST/api/reference/#facts"><span>/facts</span></a></li>
+            <li><a href="/AMT-ProjectREST/api/reference/#users"><span>/users</span></a></li>
+            <li><a href="/AMT-ProjectREST/api/reference/#organisations"><span>/organisations</span></a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-pull-3"><a id="top"></a>
           <h1>List of resources</h1>
           <hr>
-          <div class="page-header"><small></small><b>Endpoint: &nbsp;&nbsp;</b>https://localhost/api/v1
+          <div class="page-header"><small></small><b>Endpoint: &nbsp;&nbsp;</b>https://localhost:8080/amtProject/api/v1
           </div>
           <div class="panel panel-default">
             <div class="panel-heading">
@@ -340,13 +340,64 @@
                 <div class="panel panel-white">
                   <div class="panel-heading">
                     <h4 class="panel-title">
-                      <!-- collapsed "buttons" (on the right side)--><a data-toggle="collapse" href="#panel_facts" class="block collapsed"></a>
+                      <!-- collapsed "buttons" (on the right side)--><a data-toggle="collapse" href="#panel_facts" class="block collapsed"><span id="get_facts" class="badge badge_get">get  </span><span class="parent"></span>/facts
+                        </a>
                     </h4>
                   </div>
                   <div id="panel_facts" class="panel-collapse collapse">
                     <div class="panel-body">
                       <!-- extended "buttons" (list)-->
-                      <div class="list-group">
+                      <div class="list-group"><a href="#" data-toggle="modal" data-target="#facts_get" class="list-group-item"><span class="badge badge_get">get  </span><span><p><p>Retrieve a fact</p>
+</span></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="facts_get" class="modal fade">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
+                          <h4 class="modal-title"><span class="badge badge_get">get  </span>&nbsp;&nbsp;<span class="parent"></span>/facts</h4>
+                        </div>
+                        <div class="modal-body">
+                          <!-- Nav tabs-->
+                          <ul class="nav nav-tabs">
+                            <li class="active"><a href="#facts_get_description" data-toggle="tab">Description</a></li>
+                            <li><a href="#facts_get_request" data-toggle="tab">Request</a></li>
+                            <li><a href="#facts_get_response" data-toggle="tab">Response</a></li>
+                          </ul>
+                          <!-- Tab panes-->
+                          <div class="tab-content">
+                            <div id="facts_get_description" class="tab-pane active"><span><p>Retrieve a fact.</p>
+</span>
+                            </div>
+                            <div id="facts_get_request" class="tab-pane">
+                              <h3>Query Parameters</h3>
+                              <ul>
+                                <li class="markdown"><strong>sensor</strong><em> (integer)</em><p>Id of sensor</p>
+
+                                </li>
+                                <li class="markdown"><strong>type</strong><em> (string)</em><p>count the number of observations made by the sensor</p>
+
+                                  <p><small><strong>Example:</strong><code>counter or daily, if daily "date" is today by default.</code></small></p>
+                                </li>
+                                <li class="markdown"><strong>date</strong><em> (string)</em><p>count the number of observations for a day</p>
+
+                                  <p><small><strong>Example:</strong><code>yyyy-mm-dd</code></small></p>
+                                </li>
+                              </ul>
+                            </div>
+                            <div id="facts_get_response" class="tab-pane">
+                              <h2>HTTP status code&nbsp;<a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                              <h3>Body</h3>
+                              <p><strong>Type: application/json</strong></p><strong>Example:</strong>
+                              <pre>{"<span class="hljs-attribute">id</span>" : <span class="hljs-value"><span class="hljs-number">20</span></span>, "<span class="hljs-attribute">info</span>" : <span class="hljs-value"><span class="hljs-string">"20"</span></span>, "<span class="hljs-attribute">organisationId</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>, "<span class="hljs-attribute">sensorId</span>" : <span class="hljs-value"><span class="hljs-number">1</span></span>, "<span class="hljs-attribute">type</span>" : <span class="hljs-value"><span class="hljs-string">"counter"</span></span>, "<span class="hljs-attribute">visibility</span>" : <span class="hljs-value"><span class="hljs-string">"public"</span></span>}
+</pre>
+                              <h2>HTTP status code&nbsp;<a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>The fact was not found.</p>
+
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -396,7 +447,7 @@
                               <h2>HTTP status code&nbsp;<a href="http://httpstatus.es/200" target="_blank">200</a></h2>
                               <h3>Body</h3>
                               <p><strong>Type: application/json</strong></p><strong>Example:</strong>
-                              <pre>{"<span class="hljs-attribute">id</span>" : <span class="hljs-value"><span class="hljs-number">20</span></span>, "<span class="hljs-attribute">info</span>" : <span class="hljs-value"><span class="hljs-string">"Average temperature in Lausanne is 20�C"</span></span>, "<span class="hljs-attribute">type</span>" : <span class="hljs-value"><span class="hljs-string">"Temperature"</span></span>, "<span class="hljs-attribute">visibility</span>" : <span class="hljs-value"><span class="hljs-string">"public"</span></span>}
+                              <pre>{"<span class="hljs-attribute">id</span>" : <span class="hljs-value"><span class="hljs-number">20</span></span>, "<span class="hljs-attribute">info</span>" : <span class="hljs-value"><span class="hljs-string">"20"</span></span>, "<span class="hljs-attribute">organisationId</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>, "<span class="hljs-attribute">sensorId</span>" : <span class="hljs-value"><span class="hljs-number">1</span></span>, "<span class="hljs-attribute">type</span>" : <span class="hljs-value"><span class="hljs-string">"counter"</span></span>, "<span class="hljs-attribute">visibility</span>" : <span class="hljs-value"><span class="hljs-string">"public"</span></span>}
 </pre>
                               <h2>HTTP status code&nbsp;<a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>The fact was not found.</p>
 
@@ -432,14 +483,14 @@
                               </ul>
                               <h3>Body</h3>
                               <p><strong>Type: application/json</strong></p><strong>Example:</strong>
-                              <pre>{"<span class="hljs-attribute">info</span>" : <span class="hljs-value"><span class="hljs-string">"The average temperature on Yverdon for 2013 is 20�C"</span></span>, "<span class="hljs-attribute">type</span>" : <span class="hljs-value"><span class="hljs-string">"Temperature"</span></span>, "<span class="hljs-attribute">visibility</span>" : <span class="hljs-value"><span class="hljs-string">"public"</span></span>}
+                              <pre>{"<span class="hljs-attribute">id</span>" : <span class="hljs-value"><span class="hljs-number">20</span></span>, "<span class="hljs-attribute">info</span>" : <span class="hljs-value"><span class="hljs-string">"20"</span></span>, "<span class="hljs-attribute">organisationId</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>, "<span class="hljs-attribute">sensorId</span>" : <span class="hljs-value"><span class="hljs-number">1</span></span>, "<span class="hljs-attribute">type</span>" : <span class="hljs-value"><span class="hljs-string">"counter"</span></span>, "<span class="hljs-attribute">visibility</span>" : <span class="hljs-value"><span class="hljs-string">"public"</span></span>}
 </pre>
                             </div>
                             <div id="facts_factId_put_response" class="tab-pane">
                               <h2>HTTP status code&nbsp;<a href="http://httpstatus.es/201" target="_blank">201</a></h2>
                               <h3>Body</h3>
                               <p><strong>Type: application/json</strong></p><strong>Example:</strong>
-                              <pre>{"<span class="hljs-attribute">id</span>" : <span class="hljs-value"><span class="hljs-number">20</span></span>, "<span class="hljs-attribute">info</span>" : <span class="hljs-value"><span class="hljs-string">"The average temperature on Yverdon for 2013 is 20�C"</span></span>, "<span class="hljs-attribute">type</span>" : <span class="hljs-value"><span class="hljs-string">"Temperature"</span></span>, "<span class="hljs-attribute">visibility</span>" : <span class="hljs-value"><span class="hljs-string">"public"</span></span>}
+                              <pre>{"<span class="hljs-attribute">id</span>" : <span class="hljs-value"><span class="hljs-number">20</span></span>, "<span class="hljs-attribute">info</span>" : <span class="hljs-value"><span class="hljs-string">"20"</span></span>, "<span class="hljs-attribute">organisationId</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>, "<span class="hljs-attribute">sensorId</span>" : <span class="hljs-value"><span class="hljs-number">1</span></span>, "<span class="hljs-attribute">type</span>" : <span class="hljs-value"><span class="hljs-string">"counter"</span></span>, "<span class="hljs-attribute">visibility</span>" : <span class="hljs-value"><span class="hljs-string">"public"</span></span>}
 </pre>
                             </div>
                           </div>
