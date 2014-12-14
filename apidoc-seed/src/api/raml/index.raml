@@ -98,6 +98,34 @@ traits:
               Succesfully deleted observation
 
 /facts:
+  get:
+    description: Retrieve a fact.
+    queryParameters:
+      sensor:
+        displayName: Sensor
+        type: integer
+        description: Id of sensor
+        required: true
+      type:
+        displayName: Type
+        type: string
+        description: count the number of observations made by the sensor
+        example: counter or daily, if daily "date" is today by default. 
+        required: true
+      date:
+        displayName: Date
+        type: string
+        description: count the number of observations for a day
+        example: yyyy-mm-dd
+        required: false
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {"id" : 20, "info" : "20", "organisationId": 1, "sensorId" : 1, "type" : "counter", "visibility" : "public"}
+      404:
+          description: The fact was not found.
   /{factId}:
     get:
       description: Retrieve a fact.
@@ -106,7 +134,7 @@ traits:
           body:
             application/json:
               example: |
-                {"id" : 20, "info" : "Average temperature in Lausanne is 20°C", "type" : "Temperature", "visibility" : "public"}
+                {"id" : 20, "info" : "20", "organisationId": 1, "sensorId" : 1, "type" : "counter", "visibility" : "public"}
         404:
           description: The fact was not found.
     put:
@@ -114,13 +142,13 @@ traits:
       body:
         application/json:
           example: |
-            {"info" : "The average temperature on Yverdon for 2013 is 20°C", "type" : "Temperature", "visibility" : "public"}
+            {"id" : 20, "info" : "20", "organisationId": 1, "sensorId" : 1, "type" : "counter", "visibility" : "public"}
       responses:
         201:
           body:
             application/json:
               example: |
-                {"id" : 20, "info" : "The average temperature on Yverdon for 2013 is 20°C", "type" : "Temperature", "visibility" : "public"}
+                {"id" : 20, "info" : "20", "organisationId": 1, "sensorId" : 1, "type" : "counter", "visibility" : "public"}
     delete:
         is: [private]
         description: Delete a fact
