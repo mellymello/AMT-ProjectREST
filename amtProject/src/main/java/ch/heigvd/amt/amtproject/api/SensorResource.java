@@ -97,7 +97,7 @@ public class SensorResource {
         sensorDTO.setName(sensor.getName());
         sensorDTO.setDescription(sensor.getDescription());
         sensorDTO.setType(sensor.getType());
-        sensorDTO.setOrganisation(sensor.getOrganisation().getId());
+        sensorDTO.setOrganisationId(sensor.getOrganisation().getId());
         sensorDTO.setVisibility(sensor.getVisibility());
 
         return sensorDTO;
@@ -107,7 +107,7 @@ public class SensorResource {
         original.setName(sensorDTO.getName());
         original.setDescription(sensorDTO.getDescription());
         original.setType(sensorDTO.getType());
-        original.setOrganisation(organisationManager.findOrganisationById(sensorDTO.getOrganisation()));
+        original.setOrganisation(organisationManager.findOrganisationById(sensorDTO.getOrganisationId()));
         original.setVisibility(sensorDTO.getVisibility());
         
         return original;

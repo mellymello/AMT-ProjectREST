@@ -29,7 +29,10 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(
         name="findAllObservations",
-        query ="SELECT o FROM Observation o")
+        query ="SELECT o FROM Observation o"),
+    @NamedQuery(
+        name="findAverageObservationForOneDay",
+        query ="SELECT AVG(o.value) FROM Observation o WHERE o.sensor = :sensor AND o.time BETWEEN :start AND :end")
 })
 public class Observation implements Serializable {
     @Id

@@ -52,11 +52,11 @@ public class SensorDTO {
         return visibility;
     }
 
-    public long getOrganisation() {
+    public long getOrganisationId() {
         return organisationId;
     }
 
-    public void setOrganisation(long organisationId) {
+    public void setOrganisationId(long organisationId) {
         this.organisationId = organisationId;
     }
 

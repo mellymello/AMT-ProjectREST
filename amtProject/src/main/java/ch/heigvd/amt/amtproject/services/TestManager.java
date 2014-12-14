@@ -5,10 +5,12 @@
  */
 package ch.heigvd.amt.amtproject.services;
 
+import ch.heigvd.amt.amtproject.model.Observation;
 import ch.heigvd.amt.amtproject.model.Organisation;
 import ch.heigvd.amt.amtproject.model.Sensor;
 import ch.heigvd.amt.amtproject.model.User;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -29,6 +31,9 @@ public class TestManager implements TestManagerLocal {
     @EJB
     private SensorManagerLocal sensorManager;
     
+    @EJB
+    private ObservationManagerLocal observationManager;
+    
    
     @Override
     public void generateData() {
@@ -48,6 +53,13 @@ public class TestManager implements TestManagerLocal {
             
         }
         org.setContactUser(userManager.findUserById(4));
+        
+        Observation obs1 = new Observation(1, new Date(), 25.0, sen);
+        observationManager.createObservation(obs1);
+        Observation obs2 = new Observation(1, new Date(), 27.0, sen);
+        observationManager.createObservation(obs2);
+        Observation obs3 = new Observation(1, new Date(), 24.0, sen);
+        observationManager.createObservation(obs3);
         
         //organisationManager.updateOrganisation(org);
     }

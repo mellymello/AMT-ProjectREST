@@ -6,6 +6,8 @@
 package ch.heigvd.amt.amtproject.services;
 
 import ch.heigvd.amt.amtproject.model.Observation;
+import ch.heigvd.amt.amtproject.model.Sensor;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -18,6 +20,8 @@ public interface ObservationManagerLocal {
     Observation findObservationById(long observationId);
 
     List<Observation> findAllObservations();
+    
+    Double findAverageObservationForOneDay(Sensor sensor);
 
     long createObservation(Observation observation);
 

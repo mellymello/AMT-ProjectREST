@@ -9,6 +9,7 @@ import ch.heigvd.amt.amtproject.dto.FactDTO;
 import ch.heigvd.amt.amtproject.model.Fact;
 import ch.heigvd.amt.amtproject.services.FactManagerLocal;
 import ch.heigvd.amt.amtproject.services.OrganisationManagerLocal;
+import ch.heigvd.amt.amtproject.services.SensorManagerLocal;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
@@ -35,6 +36,9 @@ public class FactResource {
     
     @EJB
     OrganisationManagerLocal organisationManager;
+    
+    @EJB
+    SensorManagerLocal sensorManager;
     
     @Context
     private UriInfo context;
@@ -80,8 +84,10 @@ public class FactResource {
         factDTO.setId(fact.getId());
         factDTO.setInfo(fact.getInfo());
         factDTO.setType(fact.getType());
-        factDTO.setOrganisation(fact.getOrganisation().getId());
+        factDTO.setOrganisationId(fact.getOrganisation().getId());
         factDTO.setVisibility(fact.getVisibility());
+        factDTO.setSensorId(fact.getSensor().getId());
+        factDTO.setTime(fact.getTime());
 
         return factDTO;
     }
@@ -89,8 +95,10 @@ public class FactResource {
     private Fact toFact(FactDTO factDTO, Fact original) {
         original.setInfo(factDTO.getInfo());
         original.setType(factDTO.getType());
-        original.setOrganisation(organisationManager.findOrganisationById(factDTO.getOrganisation()));
+        original.setOrganisation(organisationManager.findOrganisationById(factDTO.getOrganisationId()));
         original.setVisibility(factDTO.getVisibility());
+        original.setSensor(sensorManager.findSensorById(factDTO.getSensorId()));
+        original.setTime(factDTO.getTime());
         
         return original;
     }

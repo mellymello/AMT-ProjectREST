@@ -55,6 +55,9 @@ public class ObservationResource {
     {
         Observation newObservation = new Observation();
         long id = observationManager.createObservation(toObservation(observationDTO,newObservation));
+        
+        
+        
         return id;
     }
     
