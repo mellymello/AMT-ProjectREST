@@ -3,3 +3,4 @@ apidoc-seed/build
 apidoc-seed/raml.json
 /amtProject/target/
 apidoc-seed/_traits
+script/node_modules
