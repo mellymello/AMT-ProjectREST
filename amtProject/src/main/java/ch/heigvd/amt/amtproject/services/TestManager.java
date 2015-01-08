@@ -10,6 +10,7 @@ import ch.heigvd.amt.amtproject.model.Observation;
 import ch.heigvd.amt.amtproject.model.Organisation;
 import ch.heigvd.amt.amtproject.model.Sensor;
 import ch.heigvd.amt.amtproject.model.User;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -47,7 +48,7 @@ public class TestManager implements TestManagerLocal {
         //now let's create some users for the organizations:
         List<Long> orgUsers= new ArrayList();
         for (int i = 1; i <= 5; i++) {
-            orgUsers.add(userManager.createUser(new User(i, "user"+i,"pass" ,"user"+i+"@org1.com", org)));
+            orgUsers.add(userManager.createUser(new User(i, "user"+i, sha256("pass"),"user"+i+"@org1.com", org)));
             
         }
         org.setContactUser(userManager.findUserById(4));
@@ -60,5 +61,24 @@ public class TestManager implements TestManagerLocal {
         observationManager.createObservation(obs3);
         
         //organisationManager.updateOrganisation(org);
+    }
+    
+    
+    public static String sha256(String base) {
+        try{
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(base.getBytes("UTF-8"));
+            StringBuffer hexString = new StringBuffer();
+
+            for (int i = 0; i < hash.length; i++) {
+                String hex = Integer.toHexString(0xff & hash[i]);
+                if(hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+
+            return hexString.toString();
+        } catch(Exception ex){
+            throw new RuntimeException(ex);
+        }
     }
 }

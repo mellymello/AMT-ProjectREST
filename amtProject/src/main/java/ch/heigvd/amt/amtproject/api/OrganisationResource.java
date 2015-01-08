@@ -59,6 +59,7 @@ public class OrganisationResource {
     public List<OrganisationDTO> getAllOrganisations ()
     {
         List<Organisation> organisations = organisationManager.findAllOrganisations();
+        
         List<OrganisationDTO> result = new LinkedList<>();
         
         for(Organisation organisation : organisations)
@@ -107,56 +108,19 @@ public class OrganisationResource {
         OrganisationDTO organisationDTO = new OrganisationDTO();
         organisationDTO.setId(organisation.getId());
         organisationDTO.setName(organisation.getName());
-        organisationDTO.setContactUser(organisation.getContactUser());
-        
-        Collection<Sensor> sensors = organisation.getSensors();
-        Collection<Long> sensorsId = new LinkedList<Long>();
-        for (Sensor sensor : sensors) {
-            sensorsId.add(sensor.getId());
+        try {
+            organisationDTO.setContactUserId(organisation.getContactUser().getId());
         }
-        organisationDTO.setSensors(sensorsId);
-        
-        Collection<User> users = organisation.getUsers();
-        Collection<Long> usersId = new LinkedList<Long>();
-        for (User user : users) {
-            usersId.add(user.getId());
+        catch (NullPointerException e) {
+            organisationDTO.setContactUserId(null);
         }
-        organisationDTO.setUsers(usersId);
-        
-        Collection<Fact> facts = organisation.getFacts();
-        Collection<Long> factsId = new LinkedList<Long>();
-        for (Fact fact : facts) {
-            factsId.add(fact.getId());
-        }
-        organisationDTO.setFacts(factsId);
         
         return organisationDTO;
     }
 
     private Organisation toOrganisation(OrganisationDTO organisationDTO, Organisation original) {
         original.setName(organisationDTO.getName());
-        original.setContactUser(organisationDTO.getContactUser());
-        
-        Collection<Long> sensorsId = organisationDTO.getSensors();
-        Collection<Sensor> sensors = new LinkedList<Sensor>();
-        for (Long sensorId: sensorsId) {
-            sensors.add(sensorManager.findSensorById(sensorId));
-        }
-        original.setSensors(sensors);
-        
-        Collection<Long> usersId = organisationDTO.getUsers();
-        Collection<User> users = new LinkedList<User>();
-        for (Long userId: usersId) {
-            users.add(userManager.findUserById(userId));
-        }
-        original.setUsers(users);
-        
-        Collection<Long> factsId = organisationDTO.getFacts();
-        Collection<Fact> facts = new LinkedList<Fact>();
-        for (Long factId: factsId) {
-            facts.add(factManager.findFactById(factId));
-        }
-        original.setFacts(facts);
+        original.setContactUser(userManager.findUserById(organisationDTO.getContactUserId()));
 
         return original;
     }

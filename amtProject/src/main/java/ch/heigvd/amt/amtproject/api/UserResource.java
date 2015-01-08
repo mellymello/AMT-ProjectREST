@@ -10,6 +10,7 @@ import ch.heigvd.amt.amtproject.dto.UserDTO;
 import ch.heigvd.amt.amtproject.model.User;
 import ch.heigvd.amt.amtproject.services.OrganisationManagerLocal;
 import ch.heigvd.amt.amtproject.services.UserManagerLocal;
+import java.security.MessageDigest;
 import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -69,17 +70,39 @@ public class UserResource {
     public long createUser (UserDTO userDTO)
     {
         User newUser = new User();
+        
+        userDTO.setPassword(sha256(userDTO.getPassword()));
+        
         long id = userManager.createUser(toUser(userDTO,newUser));
         return id;
-    }  
+    }
     
     @Path("/{id}")
     @PUT
     @Produces("application/json")
     public void updateUser (@PathParam("id") long id, UserDTO dto)
     {
+        dto.setPassword(sha256(dto.getPassword()));
         User existing = userManager.findUserById(id);
         userManager.updateUser(toUser(dto, existing));
+    }
+    
+    public static String sha256(String base) {
+        try{
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(base.getBytes("UTF-8"));
+            StringBuffer hexString = new StringBuffer();
+
+            for (int i = 0; i < hash.length; i++) {
+                String hex = Integer.toHexString(0xff & hash[i]);
+                if(hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+
+            return hexString.toString();
+        } catch(Exception ex){
+            throw new RuntimeException(ex);
+        }
     }
     
     @Path("/{id}")
@@ -94,7 +117,8 @@ public class UserResource {
         userDTO.setId(user.getId());
         userDTO.setUsername(user.getUsername());
         userDTO.setEmail(user.getEmail());
-        userDTO.setOrganisation(user.getOrganisation().getId());
+        userDTO.setOrganisationId(user.getOrganisation().getId());
+        userDTO.setPassword(user.getPassword());
         return userDTO;
     }
 
@@ -102,7 +126,8 @@ public class UserResource {
         original.setId(userDTO.getId());
         original.setUsername(userDTO.getUsername());
         original.setEmail(userDTO.getEmail());
-        original.setOrganisation(organisationManager.findOrganisationById(userDTO.getOrganisation()));
+        original.setOrganisation(organisationManager.findOrganisationById(userDTO.getOrganisationId()));
+        original.setPassword(userDTO.getPassword());
         return original;
     }
 }

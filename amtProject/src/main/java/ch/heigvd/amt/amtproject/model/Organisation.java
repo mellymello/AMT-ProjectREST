@@ -34,41 +34,13 @@ public class Organisation implements Serializable {
     private String name;
     private User contactUser;
     
-    @OneToMany(mappedBy="organisation")
-    Collection<Sensor> sensors = new LinkedList<>();
-    
-    @OneToMany(mappedBy="organisation")
-    Collection<User> users = new LinkedList<>();
-    
-    @OneToMany(mappedBy="organisation")
-    Collection<Fact> facts = new LinkedList<>();
-    
-    public Organisation(long id, String name, User contactUser, Collection<Sensor> sensors, Collection<User> users, Collection<Fact> facts) {
+    public Organisation(long id, String name, User contactUser) {
         this.id = id;
         this.name = name;
         this.contactUser = contactUser;
-        this.sensors = sensors;
-        this.users = users;
-        this.facts = facts;
     }
     
     public Organisation () {}
-
-    public Collection<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Collection<User> users) {
-        this.users = users;
-    }
-
-    public Collection<Fact> getFacts() {
-        return facts;
-    }
-
-    public void setFacts(Collection<Fact> facts) {
-        this.facts = facts;
-    }
 
     public long getId() {
         return id;
@@ -93,14 +65,5 @@ public class Organisation implements Serializable {
     public void setContactUser(User contactUser) {
         this.contactUser = contactUser;
     }
-
-    public Collection<Sensor> getSensors() {
-        return sensors;
-    }
-
-    public void setSensors(Collection<Sensor> sensors) {
-        this.sensors = sensors;
-    }
-    
     
 }

@@ -14,37 +14,15 @@ import java.util.LinkedList;
 public class OrganisationDTO {
     private long id;
     private String name;
-    private User contactUser;
-    Collection<Long> sensors = new LinkedList<>();
-    Collection<Long> users = new LinkedList<>();
-    Collection<Long> facts = new LinkedList<>();
+    private Long contactUserId;
 
-    public OrganisationDTO(long id, String name, User contactUser, Collection<Long> sensors, Collection<Long> users, Collection<Long> facts) {
+    public OrganisationDTO(long id, String name, Long contactUserId) {
         this.id = id;
         this.name = name;
-        this.contactUser = contactUser;
-        this.sensors = sensors;
-        this.users = users;
-        this.facts = facts;
+        this.contactUserId = contactUserId;
     }
     
     public OrganisationDTO () {}
-
-    public Collection<Long> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Collection<Long> users) {
-        this.users = users;
-    }
-
-    public Collection<Long> getFacts() {
-        return facts;
-    }
-
-    public void setFacts(Collection<Long> facts) {
-        this.facts = facts;
-    }
 
     public long getId() {
         return id;
@@ -54,8 +32,8 @@ public class OrganisationDTO {
         return name;
     }
 
-    public User getContactUser() {
-        return contactUser;
+    public Long getContactUserId() {
+        return contactUserId;
     }
 
     public void setId(long id) {
@@ -66,16 +44,8 @@ public class OrganisationDTO {
         this.name = name;
     }
 
-    public void setContactUser(User contactUser) {
-        this.contactUser = contactUser;
-    }
-    
-    public Collection<Long> getSensors() {
-        return sensors;
-    }
-
-    public void setSensors(Collection<Long> sensors) {
-        this.sensors = sensors;
+    public void setContactUserId(Long contactUserId) {
+        this.contactUserId = contactUserId;
     }
     
 }

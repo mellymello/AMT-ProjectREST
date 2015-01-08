@@ -11,18 +11,28 @@ package ch.heigvd.amt.amtproject.dto;
 public class UserDTO {
     private long id;
     private String username;
+    private String password;
     private String email;
     private long organisationId;
 
-    public UserDTO(long id, String username, String email, long organisationId) {
+    public UserDTO(long id, String username, String email, long organisationId, String password) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.organisationId = organisationId;
+        this.password = password;
     }
     
     public UserDTO () {}
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
     public long getId() {
         return id;
     }
@@ -35,7 +45,7 @@ public class UserDTO {
         return email;
     }
 
-    public long getOrganisation() {
+    public long getOrganisationId() {
         return organisationId;
     }
 
@@ -51,7 +61,7 @@ public class UserDTO {
         this.email = email;
     }
 
-    public void setOrganisation(long organisationId) {
+    public void setOrganisationId(long organisationId) {
         this.organisationId = organisationId;
     }
 }
