@@ -32,7 +32,7 @@ function logTransaction(stats, transaction) {
 /*
  * This function returns a function that we can use with the async.js library. 
  */ 
-function getTransactionPOSTRequestFunction(accountId) {
+function getTransactionPOSTRequestFunction() {
 		
 	return function(callback) {
 		var requestData = {
@@ -40,7 +40,9 @@ function getTransactionPOSTRequestFunction(accountId) {
 				"Content-Type": "application/json"
 			},
 			data: {
-				'accountId': accountId,
+				'time': new Date().toJSON(),
+				'value':Math.floor((Math.random() * 100) + 1),
+				'sensor': 1,
 				'amount': 0 // we will generate a random value below
 			}
 		};
@@ -48,7 +50,7 @@ function getTransactionPOSTRequestFunction(accountId) {
 		requestData.data.amount = Math.floor((Math.random() * 200) - 50);
 		logTransaction(submittedStats, requestData.data);
 		
-		client.post("http://localhost:8080/ConcurrentUpdateDemo/api/transactions", requestData, function(data, response) {
+		client.post("http://localhost:8080/amtProject/v1/api/observations", requestData, function(data, response) {
 			var error = null;
 			var result = {
 				requestData: requestData,
@@ -76,7 +78,7 @@ for (var account=1; account<=20; account++) {
 
 /*
  * Reset server side - this will delete all accounts
- */
+ 
 function resetServerState(callback) {
 	console.log("\n\n==========================================");
 	console.log("POSTing RESET command.");
@@ -85,7 +87,7 @@ function resetServerState(callback) {
 		console.log("RESET response status code: " + response.statusCode);
 		callback(null, "The RESET operation has been processed (status code: " + response.statusCode + ")");
 	});
-};
+};*/
 
 /*
  * POST transaction requests in parallel
@@ -148,7 +150,7 @@ function checkValues(callback) {
 }
 
 async.series([
-	resetServerState,
+	//resetServerState,
 	postTransactionRequestsInParallel,
 	checkValues
 ], function(err, results) {
