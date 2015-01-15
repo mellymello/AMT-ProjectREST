@@ -16,7 +16,10 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
+import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TemporalType;
 
@@ -69,6 +72,12 @@ public class ObservationManager implements ObservationManagerLocal {
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    /**
+     * This method executes in a NEW transaction. When a result is returned, an exception
+     * might be thrown by the container (OptimisticLockException). The caller should be 
+     * able to catch it.
+     */
     public long createObservation(Observation observation) {
         em.persist(observation);
         em.flush();

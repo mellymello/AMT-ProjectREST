@@ -4,7 +4,7 @@ var fs = require('fs');
 
 
 var port = 8080; 
-var hostname = '10.192.86.146';  
+var hostname = 'localhost';  
 var pathPOSTObs = '/amtProject/v1/api/observations'; 
 
 var postObs = function(id){

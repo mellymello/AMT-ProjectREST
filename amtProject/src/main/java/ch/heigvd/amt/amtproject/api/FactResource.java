@@ -15,6 +15,8 @@ import ch.heigvd.amt.amtproject.services.SensorManagerLocal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
@@ -49,7 +51,7 @@ public class FactResource {
     
     @GET
     @Produces("application/json")
-    public FactDTO getFactByParam (@QueryParam("sensor") Long sensorId, @QueryParam("type") String type, @DefaultValue("empty") @QueryParam("date") String textDate)
+    public List<FactDTO> getFactByParam (@QueryParam("sensor") Long sensorId, @QueryParam("type") String type, @DefaultValue("empty") @QueryParam("date") String textDate)
     {
         Date date = new Date();
         
@@ -65,13 +67,23 @@ public class FactResource {
         
         // Selecting the choosen type of fact
         Fact fact = new Fact();
+        List<FactDTO> factsDTO = new LinkedList<>();
         if (sensorId != null && type != null) {
             if (type.equals("counter")) {
-                return toDTO(factManager.findFactBySensorAndType(sensorManager.findSensorById(sensorId), type));
+                factsDTO.add(toDTO(factManager.findFactBySensorAndType(sensorManager.findSensorById(sensorId), type)));
+                return factsDTO;
             }
             else if (type.equals("daily")) {
-                return toDTO(factManager.findFactBySensorTypeAndDate(sensorManager.findSensorById(sensorId), type, date));
+                factsDTO.add(toDTO(factManager.findFactBySensorTypeAndDate(sensorManager.findSensorById(sensorId), type, date)));
+                return factsDTO;
             }
+        }
+        else {
+            List<Fact> facts = factManager.findAllFacts();
+            for (Fact oneFact : facts) {
+                factsDTO.add(toDTO(oneFact));
+            }
+            return factsDTO;
         }
         return null;
     }

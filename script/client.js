@@ -134,7 +134,7 @@ function postObservationRequestsInParallel(callback) {
 				numberOfUnsuccessfulResponses++;
 			} else {
 				logObservation(processedStats, results[i].requestData.data);
-				logDailyObservation(processedDailyStats, requestData.data);
+				logDailyObservation(processedDailyStats,results[i].requestData.data);
 			}
 		}
 		callback(null, results.length + " observation POSTs have been sent. " + numberOfUnsuccessfulResponses + " have failed.");
@@ -163,7 +163,7 @@ function checkValues(callback) {
 		var serverSideCounterFacts = 0;
 		var serverSideDailyFacts = 0;
 		
-		console.log("Number of facts on the client side: " + clientSideFacts);
+		console.log("Number of facts on the client side: " + clientSideFacts + clientSideCounterFacts);
 		console.log("Number of facts on the server side: " + serverSideFacts);
 		if ( clientSideFacts !== serverSideFacts) {
 			numberOfErrors++;

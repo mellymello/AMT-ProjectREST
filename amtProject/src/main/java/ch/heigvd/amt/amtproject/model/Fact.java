@@ -10,6 +10,7 @@ package ch.heigvd.amt.amtproject.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 
 
 @Entity
@@ -46,11 +48,14 @@ public class Fact implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date time;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Sensor sensor;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Organisation organisation;
+    
+    @Version
+    long version;
 
     public Fact(List<Double> info, String type, String visibility, Organisation organisation, Sensor sensor, Date time) {
         //this.id = id;

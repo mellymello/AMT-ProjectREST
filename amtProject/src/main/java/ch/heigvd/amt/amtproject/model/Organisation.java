@@ -10,10 +10,12 @@ package ch.heigvd.amt.amtproject.model;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.LinkedList;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -32,6 +34,8 @@ public class Organisation implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
     private String name;
+    
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private User contactUser;
     
     public Organisation(long id, String name, User contactUser) {

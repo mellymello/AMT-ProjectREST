@@ -8,6 +8,7 @@ package ch.heigvd.amt.amtproject.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -38,7 +39,7 @@ public class Observation implements Serializable {
     private Date time;
     private double value;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Sensor sensor;
 
     public Observation(long id, Date time, double value, Sensor sensor) {

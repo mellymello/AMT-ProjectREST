@@ -40,10 +40,12 @@ public class TestManager implements TestManagerLocal {
         Organisation org = new Organisation();
         org.setName("SuperOrg");
         long orgId = organisationManager.createOrganisation(org);
+        org = organisationManager.findOrganisationById(orgId);
         
         Sensor sen = new Sensor();
         sen.setOrganisation(org);
         long sensorId = sensorManager.createSensor(sen);
+        sen = sensorManager.findSensorById(sensorId);
         
         //now let's create some users for the organizations:
         List<Long> orgUsers= new ArrayList();

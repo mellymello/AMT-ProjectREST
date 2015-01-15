@@ -7,6 +7,7 @@
 package ch.heigvd.amt.amtproject.model;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,7 +33,7 @@ public class User implements Serializable {
     private String password;
     private String email;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Organisation organisation;
 
     public User(long id, String username, String password, String email, Organisation org) {

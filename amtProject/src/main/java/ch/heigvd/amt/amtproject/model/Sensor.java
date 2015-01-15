@@ -8,6 +8,7 @@
 package ch.heigvd.amt.amtproject.model;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,7 +36,7 @@ public class Sensor implements Serializable {
     private String type;
     private String visibility;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Organisation organisation;    
 
     public Sensor(long id, String name, String description, String type, String visibility, Organisation org) {
