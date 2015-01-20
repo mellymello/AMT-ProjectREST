@@ -163,7 +163,7 @@ function checkValues(callback) {
 		var serverSideCounterFacts = 0;
 		var serverSideDailyFacts = 0;
 		
-		console.log("Number of facts on the client side: " + clientSideFacts + clientSideCounterFacts);
+		console.log("Number of facts on the client side: " + clientSideFacts);
 		console.log("Number of facts on the server side: " + serverSideFacts);
 		if ( clientSideFacts !== serverSideFacts) {
 			numberOfErrors++;
@@ -176,10 +176,10 @@ function checkValues(callback) {
 			var factDayDate = data[i].time;
 			var factInfo = data[i].info;
 			
-			if(factType == "counter"){
+			if(factType === "counter"){
 				var serverSideNumberOfObservations = factInfo[0];
 				var clientSideNumberOfObservations = processedStats[factSensorId];
-				console.log("Number of observation on the client side: " + clientSideNumberOfObservations);
+				console.log("Number of observation on the client side: " + clientSideNumberOfObservations.numberOfObservations);
 				console.log("Number of observation on the server side: " + serverSideNumberOfObservations);
 				if (serverSideNumberOfObservations !== clientSideNumberOfObservations) {
 					numberOfErrors++;
@@ -188,7 +188,7 @@ function checkValues(callback) {
 				//console.log("Sensor " + factSourceSensorId + " --> Server/Client number of observations: " + serverSideNumberOfObservations + "/" + clientSideNumberOfObservations");				
 				}
 			}
-			else if(factType == "daily"){
+			else if(factType === "daily"){
 				console.log(factInfo[0]);
 				console.log(factInfo[1]);
 				console.log(factInfo[2]);
