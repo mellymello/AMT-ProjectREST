@@ -192,11 +192,13 @@ function checkValues(callback) {
 			else if(factType === "daily"){
 
 				//var key = "k" + observation.sensorId +":"+ observation.time.substring(0,10);
-				var key = "k" + factSensorId +":"+ factDayDate.time.substring(0,10);
+				var key = "k" + factSensorId +":"+ factDayDate.substring(0,10);
 
 				console.log("Min sur le client : "+ (processedDailyStats[key]).minValue + " et sur le serveur : " + factInfo[0]);
 				console.log("Max sur le client : "+ (processedDailyStats[key]).maxValue + " et sur le serveur : " + factInfo[1]);
-				console.log("Avg sur le client : "+ ((processedDailyStats[key]).averageValue) / (processedDailyStats[key].numberOfObservations) + " et sur le serveur : " + factInfo[2]);
+				
+				// Les valeurs ajoutées sont présentes car une observation est déjà sur le serveur au moment de lancer ce script
+				console.log("Avg sur le client : "+ ((processedDailyStats[key]).averageValue + 25) / (processedDailyStats[key].numberOfObservations + 1) + " et sur le serveur : " + factInfo[2]);
 			}
 			else{
 				consol.log("Error : unknown fact type");
