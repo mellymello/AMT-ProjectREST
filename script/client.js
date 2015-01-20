@@ -164,7 +164,8 @@ function checkValues(callback) {
 		var clientSideFacts = clientSideCounterFacts+clientSideDailyFacts;
 		var serverSideFacts = data.length;
 
-		
+
+
 		console.log("Number of facts on the client side: " + clientSideFacts);
 		console.log("Number of facts on the server side: " + serverSideFacts);
 		if ( clientSideFacts !== serverSideFacts) {
@@ -189,9 +190,13 @@ function checkValues(callback) {
 				} 
 			}
 			else if(factType === "daily"){
-				console.log("Min sur le client : "+ (processedDailyStats[factSensorId]).minValue + " et sur le serveur : " + factInfo[0]);
-				console.log("Max sur le client : "+ (processedDailyStats[factSensorId]).maxValue + " et sur le serveur : " + factInfo[1]);
-				console.log("Avg sur le client : "+ (processedDailyStats[factSensorId]).averageValue + " et sur le serveur : " + factInfo[2]);
+
+				//var key = "k" + observation.sensorId +":"+ observation.time.substring(0,10);
+				var key = "k" + factSensorId +":"+ factDayDate.time.substring(0,10);
+
+				console.log("Min sur le client : "+ (processedDailyStats[key]).minValue + " et sur le serveur : " + factInfo[0]);
+				console.log("Max sur le client : "+ (processedDailyStats[key]).maxValue + " et sur le serveur : " + factInfo[1]);
+				console.log("Avg sur le client : "+ ((processedDailyStats[key]).averageValue) / (processedDailyStats[key].numberOfObservations) + " et sur le serveur : " + factInfo[2]);
 			}
 			else{
 				consol.log("Error : unknown fact type");
