@@ -2,9 +2,7 @@
  * Developped for study purposes at Heig-VD.ch
  * Created: 20-nov-2014
  * Authors: Calixte Melly & Fr�d�ric Saam
- 
- fact == account 
- observation == transaction  //sur les observation il y a pas de concurrence
+
  
  /!\ Ne pas oublier de lancer l'entrée /amtProject/v1/api/generate AVANT de lancer ce script.
  
@@ -107,20 +105,6 @@ for (var fact=1; fact<=2; fact++) {
 };
 
 
-/*
- * Reset server side - this will delete all facts
- */
-/* 
-function resetServerState(callback) {
-	console.log("\n\n==========================================");
-	console.log("POSTing RESET command.");
-	console.log("------------------------------------------");
-	client.post("http://localhost:8080/ConcurrentUpdateDemo/api/operations/reset", function(data, response) {
-		console.log("RESET response status code: " + response.statusCode);
-		callback(null, "The RESET operation has been processed (status code: " + response.statusCode + ")");
-	});
-};
-*/
 
 /*
  * POST observation requests in parallel
@@ -191,7 +175,7 @@ function checkValues(callback) {
 			}
 			else if(factType === "daily"){
 
-				//var key = "k" + observation.sensorId +":"+ observation.time.substring(0,10);
+
 				var key = "k" + factSensorId +":"+ factDayDate.substring(0,10);
 
 				console.log("Min sur le client : "+ (processedDailyStats[key]).minValue + " et sur le serveur : " + factInfo[0]);
@@ -203,8 +187,6 @@ function checkValues(callback) {
 			else{
 				consol.log("Error : unknown fact type");
 			}
-			
-		
 			
 		}
 		
