@@ -57,10 +57,10 @@ public class TestManager implements TestManagerLocal {
         
         Observation obs1 = new Observation(1, new Date(), 25.0, sen);
         observationManager.createObservation(obs1);
-        Observation obs2 = new Observation(1, new Date(), 27.0, sen);
+        /*Observation obs2 = new Observation(1, new Date(), 27.0, sen);
         observationManager.createObservation(obs2);
         Observation obs3 = new Observation(1, new Date(), 24.0, sen);
-        observationManager.createObservation(obs3);
+        observationManager.createObservation(obs3);*/
         
         //organisationManager.updateOrganisation(org);
     }

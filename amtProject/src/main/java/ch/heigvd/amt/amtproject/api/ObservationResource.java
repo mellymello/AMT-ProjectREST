@@ -11,6 +11,8 @@ import ch.heigvd.amt.amtproject.dto.ObservationDTO;
 import ch.heigvd.amt.amtproject.model.Observation;
 import ch.heigvd.amt.amtproject.services.ObservationManagerLocal;
 import ch.heigvd.amt.amtproject.services.SensorManagerLocal;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.OptimisticLockException;
@@ -26,61 +28,75 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 
 @Path("observations")
-@Stateless
+//@Stateless
 public class ObservationResource {
 
-    @EJB
-    ObservationManagerLocal observationManager;
+  @EJB
+  ObservationManagerLocal observationManager;
 
-    @EJB
-    SensorManagerLocal sensorManager;
+  @EJB
+  SensorManagerLocal sensorManager;
 
-    @Context
-    private UriInfo context;
+  @Context
+  private UriInfo context;
 
-    public ObservationResource() {
-    }
+  public ObservationResource() {
+  }
 
-    @Path("/{id}")
-    @GET
-    @Produces("application/json")
-    public ObservationDTO getObservationDetails(@PathParam("id") long id) {
-        Observation observation = observationManager.findObservationById(id);
-        return toDTO(observation);
-    }
+  @Path("/{id}")
+  @GET
+  @Produces("application/json")
+  public ObservationDTO getObservationDetails(@PathParam("id") long id) {
+    Observation observation = observationManager.findObservationById(id);
+    return toDTO(observation);
+  }
 
-    @POST
-    @Consumes("application/json")
-    public long createObservation(ObservationDTO observationDTO) {
-        Observation newObservation = new Observation();
+  @POST
+  @Consumes("application/json")
+  public long createObservation(ObservationDTO observationDTO) {
+    Observation newObservation = new Observation();
+
+    int numberOfAttempts = 100;
+    boolean success = false;
+
+    while (!success && numberOfAttempts > 0) {
+      try {
+        numberOfAttempts--;
+        long id = observationManager.createObservation(toObservation(observationDTO, newObservation));
+        success = true;
+        return id;
+      } catch (Exception e) {
+        LOG.log(Level.INFO, "OptimisticLockException... let's try one more time... (remaining attempts: " + numberOfAttempts + ")");
         try {
-            long id = observationManager.createObservation(toObservation(observationDTO, newObservation));
-
-            return id;
-        } catch (OptimisticLockException e) {
-            throw new WebApplicationException("Concurrent update!!");
+          Thread.sleep((long)Math.random()*200);
+        } catch (InterruptedException ex) {
+          Logger.getLogger(ObservationResource.class.getName()).log(Level.SEVERE, null, ex);
         }
+      }
     }
+    throw new WebApplicationException("Concurrent update!!");
+  }
+  private static final Logger LOG = Logger.getLogger(ObservationResource.class.getName());
 
-    @Path("/{id}")
-    @DELETE
-    public void deleteObservation(@PathParam("id") long id) {
-        observationManager.deleteObservation(id);
-    }
+  @Path("/{id}")
+  @DELETE
+  public void deleteObservation(@PathParam("id") long id) {
+    observationManager.deleteObservation(id);
+  }
 
-    private ObservationDTO toDTO(Observation observation) {
-        ObservationDTO observationDTO = new ObservationDTO();
-        observationDTO.setId(observation.getId());
-        observationDTO.setTime(observation.getTime());
-        observationDTO.setValue(observation.getValue());
-        observationDTO.setSensorId(observation.getSensor().getId());
-        return observationDTO;
-    }
+  private ObservationDTO toDTO(Observation observation) {
+    ObservationDTO observationDTO = new ObservationDTO();
+    observationDTO.setId(observation.getId());
+    observationDTO.setTime(observation.getTime());
+    observationDTO.setValue(observation.getValue());
+    observationDTO.setSensorId(observation.getSensor().getId());
+    return observationDTO;
+  }
 
-    private Observation toObservation(ObservationDTO observationDTO, Observation original) {
-        original.setTime(observationDTO.getTime());
-        original.setValue(observationDTO.getValue());
-        original.setSensor(sensorManager.findSensorById(observationDTO.getSensorId()));
-        return original;
-    }
+  private Observation toObservation(ObservationDTO observationDTO, Observation original) {
+    original.setTime(observationDTO.getTime());
+    original.setValue(observationDTO.getValue());
+    original.setSensor(sensorManager.findSensorById(observationDTO.getSensorId()));
+    return original;
+  }
 }

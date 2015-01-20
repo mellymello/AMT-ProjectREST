@@ -36,7 +36,7 @@ public class Sensor implements Serializable {
     private String type;
     private String visibility;
     
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private Organisation organisation;    
 
     public Sensor(long id, String name, String description, String type, String visibility, Organisation org) {

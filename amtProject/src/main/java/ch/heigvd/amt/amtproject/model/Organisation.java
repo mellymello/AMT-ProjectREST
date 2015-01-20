@@ -35,7 +35,7 @@ public class Organisation implements Serializable {
     private long id;
     private String name;
     
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private User contactUser;
     
     public Organisation(long id, String name, User contactUser) {

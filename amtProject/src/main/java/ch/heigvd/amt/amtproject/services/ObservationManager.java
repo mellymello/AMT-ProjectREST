@@ -72,13 +72,14 @@ public class ObservationManager implements ObservationManagerLocal {
     }
 
     @Override
-    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    //@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     /**
      * This method executes in a NEW transaction. When a result is returned, an exception
      * might be thrown by the container (OptimisticLockException). The caller should be 
      * able to catch it.
      */
     public long createObservation(Observation observation) {
+        observation.setSensor(em.merge(observation.getSensor()));
         em.persist(observation);
         em.flush();
         

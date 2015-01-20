@@ -33,7 +33,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 
 @Path("facts")
-@Stateless
+//@Stateless
 public class FactResource {
     @EJB
     FactManagerLocal factManager;

@@ -19,7 +19,7 @@ import javax.ws.rs.core.UriInfo;
 
 
 @Path("generate")
-@Stateless
+//@Stateless
 public class TestResource {
     
     @EJB

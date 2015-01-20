@@ -5,6 +5,9 @@
  
  fact == account 
  observation == transaction  //sur les observation il y a pas de concurrence
+ 
+ /!\ Ne pas oublier de lancer l'entrée /amtProject/v1/api/generate AVANT de lancer ce script.
+ 
  */
 
 var Client = require('node-rest-client').Client;
@@ -156,12 +159,11 @@ function checkValues(callback) {
 	client.get("http://localhost:8080/amtProject/v1/api/facts", requestData, function(data, response) {
 		var numberOfErrors = 0;
 		
-		var clientSideCounterFacts = submittedStats.length;
-		var clientSideDailyFacts = submittedDailyStats.length;
+		var clientSideCounterFacts = Object.keys(submittedStats).length;
+		var clientSideDailyFacts = Object.keys(submittedDailyStats).length;
 		var clientSideFacts = clientSideCounterFacts+clientSideDailyFacts;
 		var serverSideFacts = data.length;
-		var serverSideCounterFacts = 0;
-		var serverSideDailyFacts = 0;
+
 		
 		console.log("Number of facts on the client side: " + clientSideFacts);
 		console.log("Number of facts on the server side: " + serverSideFacts);
@@ -177,21 +179,19 @@ function checkValues(callback) {
 			var factInfo = data[i].info;
 			
 			if(factType === "counter"){
-				var serverSideNumberOfObservations = factInfo[0];
+				var serverSideNumberOfObservations = (factInfo[0])-1; // Nous enlevons 1 car /amtProject/v1/api/generate créée une observation avant ce script
 				var clientSideNumberOfObservations = processedStats[factSensorId];
 				console.log("Number of observation on the client side: " + clientSideNumberOfObservations.numberOfObservations);
 				console.log("Number of observation on the server side: " + serverSideNumberOfObservations);
-				if (serverSideNumberOfObservations !== clientSideNumberOfObservations) {
+				if (serverSideNumberOfObservations !== clientSideNumberOfObservations.numberOfObservations) {
 					numberOfErrors++;
-					console.log("Sensor " + factSensorId + " --> Server/Client number of observations: " + serverSideNumberOfObservations + "/" + clientSideNumberOfObservations + "  X");
-				} else {
-				//console.log("Sensor " + factSourceSensorId + " --> Server/Client number of observations: " + serverSideNumberOfObservations + "/" + clientSideNumberOfObservations");				
-				}
+					console.log("Sensor " + factSensorId + " --> Server/Client number of observations: " + serverSideNumberOfObservations + "/" + clientSideNumberOfObservations.numberOfObservations + "  X");
+				} 
 			}
 			else if(factType === "daily"){
-				console.log(factInfo[0]);
-				console.log(factInfo[1]);
-				console.log(factInfo[2]);
+				console.log("Min sur le client : "+ (processedDailyStats[factSensorId]).minValue + " et sur le serveur : " + factInfo[0]);
+				console.log("Max sur le client : "+ (processedDailyStats[factSensorId]).maxValue + " et sur le serveur : " + factInfo[1]);
+				console.log("Avg sur le client : "+ (processedDailyStats[factSensorId]).averageValue + " et sur le serveur : " + factInfo[2]);
 			}
 			else{
 				consol.log("Error : unknown fact type");

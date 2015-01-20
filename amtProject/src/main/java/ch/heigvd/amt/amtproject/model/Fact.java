@@ -48,10 +48,10 @@ public class Fact implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date time;
     
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private Sensor sensor;
     
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private Organisation organisation;
     
     @Version

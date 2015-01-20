@@ -39,7 +39,7 @@ public class Observation implements Serializable {
     private Date time;
     private double value;
     
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private Sensor sensor;
 
     public Observation(long id, Date time, double value, Sensor sensor) {

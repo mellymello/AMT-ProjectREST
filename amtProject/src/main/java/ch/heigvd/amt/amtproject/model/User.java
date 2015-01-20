@@ -33,7 +33,7 @@ public class User implements Serializable {
     private String password;
     private String email;
     
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private Organisation organisation;
 
     public User(long id, String username, String password, String email, Organisation org) {
