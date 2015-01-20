@@ -1,7 +1,7 @@
 /*
  * Developped for study purposes at Heig-VD.ch
  * Created: 20-nov-2014
- * Authors: Calixte Melly & Frédéric Saam
+ * Authors: Calixte Melly & Frï¿½dï¿½ric Saam
  
  fact == account 
  observation == transaction  //sur les observation il y a pas de concurrence
@@ -15,20 +15,20 @@ var async = require('async');
 // even if they result in an error (for instance if two parallel requests try to create a new fact).
 // In this case, the client is informed that the observation has failed and it would be his responsibility
 // to retry.
-var submittedStats = {}
-var submittedDailyStats = {}
+var submittedStats = {};
+var submittedDailyStats = {};
 
 // This map keeps track of the observations posted by the client, but only if the server has confirmed
 // their processing with a successful status code. 
 // In this case, the client can assume that the observation has been successfully processed.
 var processedStats = {};
-var processedDailyStats = {}
+var processedDailyStats = {};
 
 
 function logObservation(stats, observation) {
 	var factStats = stats[observation.sensorId] || {
 		sensorId: observation.sensorId,
-		numberOfObservations: 0,
+		numberOfObservations: 0
 		};
 	factStats.numberOfObservations += 1;
 	stats[observation.sensorId] = factStats;
