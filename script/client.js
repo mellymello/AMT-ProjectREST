@@ -156,8 +156,8 @@ function checkValues(callback) {
 	client.get("http://localhost:8080/amtProject/v1/api/facts", requestData, function(data, response) {
 		var numberOfErrors = 0;
 		
-		var clientSideCounterFacts = Object.keys(submittedStats).length;
-		var clientSideDailyFacts = Object.keys(submittedDailyStats).length;
+		var clientSideCounterFacts = submittedStats.length;
+		var clientSideDailyFacts = submittedDailyStats.length;
 		var clientSideFacts = clientSideCounterFacts+clientSideDailyFacts;
 		var serverSideFacts = data.length;
 		var serverSideCounterFacts = 0;
@@ -173,20 +173,25 @@ function checkValues(callback) {
 	
 			var factSensorId = data[i].sensorId;
 			var factType = data[i].type;
-			var factDayDate = data[i].dayDate;
+			var factDayDate = data[i].time;
 			var factInfo = data[i].info;
 			
 			if(factType == "counter"){
 				var serverSideNumberOfObservations = factInfo[0];
 				var clientSideNumberOfObservations = processedStats[factSensorId];
+				console.log("Number of observation on the client side: " + clientSideNumberOfObservations);
+				console.log("Number of observation on the server side: " + serverSideNumberOfObservations);
 				if (serverSideNumberOfObservations !== clientSideNumberOfObservations) {
-				numberOfErrors++;
-				console.log("Sensor " + factSensorId + " --> Server/Client number of observations: " + serverSideNumberOfObservations + "/" + clientSideNumberOfObservations + "  X");
+					numberOfErrors++;
+					console.log("Sensor " + factSensorId + " --> Server/Client number of observations: " + serverSideNumberOfObservations + "/" + clientSideNumberOfObservations + "  X");
 				} else {
 				//console.log("Sensor " + factSourceSensorId + " --> Server/Client number of observations: " + serverSideNumberOfObservations + "/" + clientSideNumberOfObservations");				
 				}
 			}
 			else if(factType == "daily"){
+				console.log(factInfo[0]);
+				console.log(factInfo[1]);
+				console.log(factInfo[2]);
 			}
 			else{
 				consol.log("Error : unknown fact type");
