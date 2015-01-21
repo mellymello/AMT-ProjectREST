@@ -43,7 +43,7 @@ public class TestResource {
     @Path("reset")
     public String resetTestData() {
         testManager.resetData();
-        return "Data generated.";
+        return "Data deleted.";
     }
     
 

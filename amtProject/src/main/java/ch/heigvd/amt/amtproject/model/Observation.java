@@ -30,8 +30,8 @@ import javax.persistence.TemporalType;
         name="findAverageObservationForOneDay",
         query ="SELECT AVG(o.value) FROM Observation o WHERE o.sensor = :sensor AND o.time BETWEEN :start AND :end"),
     @NamedQuery(
-        name="Fact.deleteAll",
-        query ="DELETE FROM Fact")
+        name="Observation.deleteAll",
+        query ="DELETE FROM Observation")
 })
 public class Observation implements Serializable {
     @Id

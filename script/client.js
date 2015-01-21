@@ -25,6 +25,23 @@ var submittedDailyStats = {};
 var processedStats = {};
 var processedDailyStats = {};
 
+var sensorIdGlobal = 0;
+
+function getSensorId(callback) {
+	console.log("\n\n==========================================");
+    console.log("GETing sensor id command.");
+    console.log("------------------------------------------");
+	var requestData = {
+		headers:{
+			"Accept": "application/json"
+		}
+	};
+	client.get("http://localhost:8080/amtProject/v1/api/sensors", requestData, function(data, response) {
+		sensorIdGlobal = data[0].id;
+		console.log("GETSENSORID response status code: " + response.statusCode);
+		callback(null, "The GETSENSORID operation has been processed (status code: " + response.statusCode + ")");
+	});
+}
 
 function logObservation(stats, observation) {
 	var factStats = stats[observation.sensorId] || {
@@ -70,14 +87,14 @@ function getObservationPOSTRequestFunction(sensorId) {
 			},
 			data: {
 				'time' : new Date().toJSON(),
+		
 				'value': Math.floor((Math.random() * 200) - 50),
-				'sensorId' : 1 
+				'sensorId' :  sensorIdGlobal
 			}
 		};
 		
 		logObservation(submittedStats, requestData.data);
 		logDailyObservation(submittedDailyStats, requestData.data);
-		
 		
 		client.post("http://localhost:8080/amtProject/v1/api/observations", requestData, function(data, response) {
 			var error = null;
@@ -107,6 +124,8 @@ for (var fact=1; fact<=2; fact++) {
 /*
  * Reset server side - this will delete all data
  */
+ 
+
 function resetServerState(callback) {
     console.log("\n\n==========================================");
     console.log("POSTing RESET command.");
@@ -124,7 +143,7 @@ function generateServerState(callback) {
     console.log("\n\n==========================================");
     console.log("GETing GENERATE command.");
     console.log("------------------------------------------");
-    client.post("http://localhost:8080/amtProject/v1/api/testData/generate", function(data, response) {
+    client.get("http://localhost:8080/amtProject/v1/api/testData/generate", function(data, response) {
         console.log("GENERATE response status code: " + response.statusCode);
         callback(null, "The GENERATE operation has been processed (status code: " + response.statusCode + ")");
     });
@@ -221,6 +240,7 @@ function checkValues(callback) {
 async.series([
 	resetServerState,
     generateServerState,
+	getSensorId,
 	postObservationRequestsInParallel,
 	checkValues
 ], function(err, results) {
