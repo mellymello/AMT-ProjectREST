@@ -105,26 +105,26 @@ for (var fact=1; fact<=2; fact++) {
 };
 
 /*
- * Reset server side - this will delete all accounts
+ * Reset server side - this will delete all data
  */
 function resetServerState(callback) {
     console.log("\n\n==========================================");
     console.log("POSTing RESET command.");
     console.log("------------------------------------------");
-    client.post("http://localhost:8080/amtProject/v1/api/dataTest/reset", function(data, response) {
+    client.post("http://localhost:8080/amtProject/v1/api/testData/reset", function(data, response) {
         console.log("RESET response status code: " + response.statusCode);
         callback(null, "The RESET operation has been processed (status code: " + response.statusCode + ")");
     });
 };
 
 /*
- * Reset server side - this will delete all accounts
+ * generate server side - this will generate all data
  */
 function generateServerState(callback) {
     console.log("\n\n==========================================");
     console.log("GETing GENERATE command.");
     console.log("------------------------------------------");
-    client.post("http://localhost:8080/amtProject/v1/api/dataTest/generate", function(data, response) {
+    client.post("http://localhost:8080/amtProject/v1/api/testData/generate", function(data, response) {
         console.log("GENERATE response status code: " + response.statusCode);
         callback(null, "The GENERATE operation has been processed (status code: " + response.statusCode + ")");
     });
