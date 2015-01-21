@@ -18,6 +18,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TemporalType;
 
 
@@ -147,6 +148,7 @@ public class ObservationManager implements ObservationManagerLocal {
 
     @Override
     public void deleteAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Query query = em.createNamedQuery("Observation.deleteAll");
+        query.executeUpdate();
     }
 }
