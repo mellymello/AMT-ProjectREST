@@ -27,7 +27,10 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(
         name="findAllOrganisations",
-        query ="SELECT o FROM Organisation o")
+        query ="SELECT o FROM Organisation o"),
+    @NamedQuery(
+        name="Fact.deleteAll",
+        query ="DELETE FROM Fact")
 })
 public class Organisation implements Serializable {
     @Id

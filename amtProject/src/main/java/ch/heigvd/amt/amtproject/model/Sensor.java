@@ -25,7 +25,10 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(
         name="findAllSensors",
-        query ="SELECT s FROM Sensor s")
+        query ="SELECT s FROM Sensor s"),
+    @NamedQuery(
+        name="Fact.deleteAll",
+        query ="DELETE FROM Fact")
 })
 public class Sensor implements Serializable {
     @Id

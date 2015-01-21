@@ -11,4 +11,5 @@ import javax.ejb.Local;
 @Local
 public interface TestManagerLocal {
     public void generateData();
+    public void resetData();
 }

@@ -27,4 +27,6 @@ public interface FactManagerLocal {
     void updateFact(Fact fact);
 
     void deleteFact(long userId);
+    
+    void deleteAll();
 }

@@ -35,7 +35,10 @@ import javax.persistence.Version;
         query ="SELECT f FROM Fact f WHERE f.sensor = :sensor AND f.type = :type"),
     @NamedQuery(
         name="findFactBySensorTypeAndDate",
-        query ="SELECT f FROM Fact f WHERE f.sensor = :sensor AND f.type = :type AND f.time = :date")
+        query ="SELECT f FROM Fact f WHERE f.sensor = :sensor AND f.type = :type AND f.time = :date"),
+    @NamedQuery(
+        name="Fact.deleteAll",
+        query ="DELETE FROM Fact")
 })
 public class Fact implements Serializable {
     @Id

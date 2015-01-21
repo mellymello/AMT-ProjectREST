@@ -14,6 +14,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TemporalType;
 
 
@@ -71,5 +72,11 @@ public class FactManager implements FactManagerLocal {
         catch(NoResultException e) {
             return null;
         }
+    }
+
+    @Override
+    public void deleteAll() {
+       Query query = em.createNamedQuery("Fact.deleteAll");
+        query.executeUpdate();
     }
 }

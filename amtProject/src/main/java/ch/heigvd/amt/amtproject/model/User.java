@@ -23,7 +23,10 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(
         name="findAllUsers",
-        query ="SELECT u FROM User u")
+        query ="SELECT u FROM User u"),
+    @NamedQuery(
+        name="Fact.deleteAll",
+        query ="DELETE FROM Fact")
 })
 public class User implements Serializable {
     @Id

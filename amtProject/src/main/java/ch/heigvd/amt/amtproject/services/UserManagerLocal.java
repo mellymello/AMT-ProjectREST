@@ -23,4 +23,6 @@ public interface UserManagerLocal {
 
     void deleteUser(long userId);
     
+    void deleteAll();
+    
 }

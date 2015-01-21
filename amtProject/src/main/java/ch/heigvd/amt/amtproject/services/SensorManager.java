@@ -11,6 +11,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 
 @Stateless
@@ -43,5 +44,11 @@ public class SensorManager implements SensorManagerLocal {
     @Override
     public void deleteSensor(long userId) {
         em.remove(em.find(Sensor.class, userId));
+    }
+
+    @Override
+    public void deleteAll() {
+        Query query = em.createNamedQuery("Sensor.deleteAll");
+        query.executeUpdate();
     }
 }

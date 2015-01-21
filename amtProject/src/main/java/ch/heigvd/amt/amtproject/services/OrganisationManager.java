@@ -11,6 +11,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 
 @Stateless
@@ -44,6 +45,12 @@ public class OrganisationManager implements OrganisationManagerLocal {
     @Override
     public void deleteOrganisation(long organisationId) {
         em.remove(em.find(Organisation.class, organisationId));
+    }
+
+    @Override
+    public void deleteAll() {
+        Query query = em.createNamedQuery("Organisation.deleteAll");
+        query.executeUpdate();
     }
 
     

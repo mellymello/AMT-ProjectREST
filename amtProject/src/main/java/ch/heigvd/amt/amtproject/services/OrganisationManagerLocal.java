@@ -24,4 +24,6 @@ public interface OrganisationManagerLocal {
 
     void deleteOrganisation(long orgId);
     
+    void deleteAll();
+    
 }

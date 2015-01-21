@@ -12,13 +12,14 @@ import ch.heigvd.amt.amtproject.services.TestManagerLocal;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 
 
-@Path("generate")
+@Path("testData")
 //@Stateless
 public class TestResource {
     
@@ -31,12 +32,19 @@ public class TestResource {
     public TestResource() {}
 
     @GET
+    @Path("generate")
     @Produces("application/json")
     public String generateTestData() {
         testManager.generateData();
         return "Data generated.";
     }
-
+    
+    @POST
+    @Path("reset")
+    public String resetTestData() {
+        testManager.resetData();
+        return "Data generated.";
+    }
     
 
 }

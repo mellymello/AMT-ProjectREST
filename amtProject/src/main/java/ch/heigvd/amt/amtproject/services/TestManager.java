@@ -33,6 +33,9 @@ public class TestManager implements TestManagerLocal {
     @EJB
     private ObservationManagerLocal observationManager;
     
+    @EJB
+    private FactManagerLocal factManager;
+    
    
     @Override
     public void generateData() {
@@ -82,5 +85,22 @@ public class TestManager implements TestManagerLocal {
         } catch(Exception ex){
             throw new RuntimeException(ex);
         }
+    }
+
+    @Override
+    public void resetData() {
+        factManager.deleteAll();
+        observationManager.deleteAll();
+        sensorManager.deleteAll();
+        
+        
+        List<Organisation> allOrg= organisationManager.findAllOrganisations();
+        for (Organisation o : allOrg) {
+            o.setContactUser(null);
+            organisationManager.updateOrganisation(o);
+        }
+        
+        userManager.deleteAll();
+        organisationManager.deleteAll();
     }
 }

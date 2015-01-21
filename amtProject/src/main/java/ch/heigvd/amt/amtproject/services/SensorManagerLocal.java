@@ -22,4 +22,6 @@ public interface SensorManagerLocal {
     public void updateSensor(Sensor sensor);
 
     public void deleteSensor(long userId);
+    
+    void deleteAll();
 }

@@ -28,4 +28,6 @@ public interface ObservationManagerLocal {
     void deleteObservation(long obsId);
 
     public Date getStartOfDay(Date date);
+    
+    void deleteAll();
 }
