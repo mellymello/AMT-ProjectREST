@@ -94,12 +94,12 @@ public class ObservationManager implements ObservationManagerLocal {
         else {
             List<Double> info = new LinkedList<>();
             info.add(1.0);
-            f = new Fact(info, "counter", "public", observation.getSensor().getOrganisation(), observation.getSensor(), observation.getTime());
+            f = new Fact(info, "counter", "public", observation.getSensor().getOrganisation(), observation.getSensor(), new Date());
             factManager.createFact(f);
         }
         
         //Creating or updating daily fact
-        Fact f1 = factManager.findFactBySensorTypeAndDate(observation.getSensor(), "daily", observation.getTime());
+        Fact f1 = factManager.findFactBySensorTypeAndDate(observation.getSensor(), "daily", new Date());
         if (f1 != null) {
             List<Double> oldValue = f1.getInfo();
             List<Double> newValue = new LinkedList<>();
