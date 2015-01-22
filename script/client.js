@@ -59,8 +59,8 @@ function logDailyObservation(stats, observation) {
 		sensorId: observation.sensorId,
 		numberOfObservations: 0,
 		averageValue : 0,
-		minValue : 0,
-		maxValue : 0
+		minValue : observation.value,
+		maxValue : observation.value
 		
 		};
 	factStats.numberOfObservations += 1;
